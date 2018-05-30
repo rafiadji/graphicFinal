@@ -14,7 +14,7 @@ import javax.media.opengl.glu.GLU;
 
 /**
  * GraphicFinal.java <BR>
- * author: Brian Paul (converted to Java by Ron Cemer and Sven Goethel) <P>
+ * author: Ninda <P>
  *
  * This version is equal to Brian Paul's version 1.2 1999/10/21
  */
