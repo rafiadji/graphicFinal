@@ -21,7 +21,7 @@ import javax.media.opengl.glu.GLU;
 public class GraphicFinal implements GLEventListener {
 
     public static void main(String[] args) {
-        Frame frame = new Frame("Simple JOGL Application");
+        Frame frame = new Frame("TA Grafis");
         GLCanvas canvas = new GLCanvas();
 
         canvas.addGLEventListener(new GraphicFinal());
