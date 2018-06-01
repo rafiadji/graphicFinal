@@ -125,18 +125,9 @@ public class Objek {
         gl.glVertex3f(6.0f, -0.8f, 0.0f);
         gl.glEnd();
 
-        //garis tengah lapangan
-        gl.glBegin(GL.GL_LINE_STRIP);
-        gl.glColor3f(1f, 1f, 1f);
-        gl.glVertex3f(-6.0f, -1.5f, 0.0f);
-        gl.glVertex3f(-6.0f, -1.5f, 0.0f);
-        gl.glVertex3f(-6.0f, 0.0f, 0.0f);
-        gl.glVertex3f(-6.0f, 1.5f, 0.0f);
-        gl.glVertex3f(-4.5f, 1.5f, 0.0f);
-        gl.glVertex3f(-4.5f, -1.5f, 0.0f);
-        gl.glVertex3f(-6.0f, -1.5f, 0.0f);
-        gl.glEnd();
 
+
+        //garis tengah lapangan
         gl.glBegin(GL.GL_LINE_STRIP);
         gl.glColor3f(1f, 1f, 1f);
         gl.glVertex3f(0.0f, 2.30f, 0.0f);
