@@ -159,8 +159,20 @@ public class Objek {
         gl.glEnd();
     }
 
-    static void Kerucut(GL gl) {
-        float BODY_LENGTH = 1.0f;
+    static void Kepala(GL gl, GLU glu) {
+        double clip_plane1[] = {0.0, 0.0, -1.0, 0.0};
+        gl.glClipPlane(GL.GL_CLIP_PLANE1, clip_plane1, 0);
+        gl.glEnable(GL.GL_CLIP_PLANE1);
+        // drawing a sphere
+        GLUquadric qd = glu.gluNewQuadric();
+        glu.gluSphere(qd, 0.3f, 60, 60);
+        glu.gluDeleteQuadric(qd);
+        gl.glDisable(GL.GL_CLIP_PLANE1);
+        glu.gluDisk(qd, 0.0f, 0.3f, 60, 60);
+    }
+    
+    static void BadanPemain(GL gl) {
+        float BODY_LENGTH = 0.5f;
         float BODY_RADIUS = 0.2f;
         float BODY_RADIUS1 = 0.0f;
 
