@@ -15,13 +15,13 @@ import javax.media.opengl.glu.GLU;
 /**
  * GraphicFinal.java <BR>
  * author: Ninda Zulistyaningsih <P>
- *
+ *         M Tegar Maha Putra 
  * This version is equal to Brian Paul's version 1.2 1999/10/21
  */
 public class GraphicFinal implements GLEventListener {
 
     public static void main(String[] args) {
-        Frame frame = new Frame("Simple JOGL Application");
+        Frame frame = new Frame("TA Grafis");
         GLCanvas canvas = new GLCanvas();
 
         canvas.addGLEventListener(new GraphicFinal());
@@ -91,32 +91,10 @@ public class GraphicFinal implements GLEventListener {
         gl.glLoadIdentity();
 
         // Move the "drawing cursor" around
-        gl.glTranslatef(-1.5f, 0.0f, -6.0f);
+        gl.glTranslatef(0.0f, 0.0f, -12.0f);
 
-        // Drawing Using Triangles
-        gl.glBegin(GL.GL_TRIANGLES);
-            gl.glColor3f(1.0f, 0.0f, 0.0f);    // Set the current drawing color to red
-            gl.glVertex3f(0.0f, 1.0f, 0.0f);   // Top
-            gl.glColor3f(0.0f, 1.0f, 0.0f);    // Set the current drawing color to green
-            gl.glVertex3f(-1.0f, -1.0f, 0.0f); // Bottom Left
-            gl.glColor3f(0.0f, 0.0f, 1.0f);    // Set the current drawing color to blue
-            gl.glVertex3f(1.0f, -1.0f, 0.0f);  // Bottom Right
-        // Finished Drawing The Triangle
-        gl.glEnd();
+     Objek.Lapangan(drawable);
 
-        // Move the "drawing cursor" to another position
-        gl.glTranslatef(3.0f, 0.0f, 0.0f);
-        // Draw A Quad
-        gl.glBegin(GL.GL_QUADS);
-            gl.glColor3f(0.5f, 0.5f, 1.0f);    // Set the current drawing color to light blue
-            gl.glVertex3f(-1.0f, 1.0f, 0.0f);  // Top Left
-            gl.glVertex3f(1.0f, 1.0f, 0.0f);   // Top Right
-            gl.glVertex3f(1.0f, -1.0f, 0.0f);  // Bottom Right
-            gl.glVertex3f(-1.0f, -1.0f, 0.0f); // Bottom Left
-        // Done Drawing The Quad
-        gl.glEnd();
-
-        // Flush all drawing operations to the graphics card
         gl.glFlush();
     }
 
