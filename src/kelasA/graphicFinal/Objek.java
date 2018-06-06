@@ -158,7 +158,8 @@ public class Objek {
         gl.glVertex3f(0.0f, 0.0f, 0.0f);
         gl.glEnd();
     }
-
+    
+    
     static void Pemain(GL gl, GLU glu) {
         //kepala
         double clip_plane1[] = {0.0, 0.0, -1.0, 0.0};
