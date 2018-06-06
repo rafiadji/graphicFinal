@@ -19,6 +19,8 @@ import javax.media.opengl.glu.GLU;
  */
 public class GraphicFinal implements GLEventListener {
 
+    float angle = 0;
+
     public static void main(String[] args) {
         Frame frame = new Frame("TA Grafis");
         GLCanvas canvas = new GLCanvas();
@@ -83,16 +85,20 @@ public class GraphicFinal implements GLEventListener {
 
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
-
+        angle += 0.5;
         // Clear the drawing area
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         // Reset the current matrix to the "identity"
         gl.glLoadIdentity();
+    
 
         // Move the "drawing cursor" around
-        gl.glTranslatef(0.0f, 0.0f, -12.0f);
-
+        gl.glTranslatef(0.0f, 0.0f, -15.0f);
+        gl.glRotatef(-145, 1, 0, 0);
+        gl.glRotatef(angle, 1, 0, 0);
+        gl.glPushMatrix();
         Objek.Lapangan(drawable);
+        gl.glPopMatrix();
 
         gl.glFlush();
     }
