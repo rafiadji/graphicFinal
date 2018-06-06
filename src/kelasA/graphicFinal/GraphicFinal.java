@@ -95,7 +95,7 @@ public class GraphicFinal implements GLEventListener {
         // Move the "drawing cursor" around
         gl.glTranslatef(0.0f, 0.0f, -15.0f);
         gl.glRotatef(-145, 1, 0, 0);
-        //gl.glRotatef(angle, 1, 0, 0);
+        gl.glRotatef(angle, 1, 0, 0);
         gl.glPushMatrix();
         Objek.Lapangan(drawable);
         gl.glPopMatrix();
