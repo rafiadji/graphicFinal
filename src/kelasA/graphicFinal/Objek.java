@@ -191,5 +191,31 @@ public class Objek {
         gl.glEnd();
 
     }
+    
+    
+    static void Pemain(GL gl, GLU glu) {
+        //kepala
+        double clip_plane1[] = {0.0, 0.0, -1.0, 0.0};
+        gl.glClipPlane(GL.GL_CLIP_PLANE1, clip_plane1, 0);
+        gl.glEnable(GL.GL_CLIP_PLANE1);
 
+        GLUquadric qd = glu.gluNewQuadric();
+        glu.gluSphere(qd, 0.3f, 60, 60);
+        glu.gluDeleteQuadric(qd);
+        gl.glDisable(GL.GL_CLIP_PLANE1);
+        glu.gluDisk(qd, 0.0f, 0.3f, 60, 60);
+
+        //badan
+        float BODY_LENGTH = 0.5f;
+        float BODY_RADIUS = 0.2f;
+        float BODY_RADIUS1 = 0.0f;
+        int SLICES = 30;
+        int STACKS = 30;
+        GLUquadric q = glu.gluNewQuadric();
+
+        glu.gluCylinder(q, BODY_RADIUS1, BODY_RADIUS, BODY_LENGTH, SLICES, STACKS);
+        gl.glTranslatef(0.0f, 0.0f, BODY_LENGTH);
+        glu.gluDisk(q, 0.0f, BODY_RADIUS, SLICES, STACKS);
+
+    }
 }
