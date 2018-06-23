@@ -10,15 +10,16 @@ import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
-
-
 /**
  * GraphicFinal.java <BR>
- * author: Ninda Zulistyaningsih <P>
- *         M Tegar Maha Putra 
- * This version is equal to Brian Paul's version 1.2 1999/10/21
+ * author: Ninda Zulistyaningsih
+ * <P>
+ * M Tegar Maha Putra This version is equal to Brian Paul's version 1.2
+ * 1999/10/21
  */
 public class GraphicFinal implements GLEventListener {
+
+    float angle = 0;
 
     public static void main(String[] args) {
         Frame frame = new Frame("TA Grafis");
@@ -70,7 +71,7 @@ public class GraphicFinal implements GLEventListener {
         GLU glu = new GLU();
 
         if (height <= 0) { // avoid a divide by zero error!
-        
+
             height = 1;
         }
         final float h = (float) width / (float) height;
@@ -84,16 +85,20 @@ public class GraphicFinal implements GLEventListener {
 
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
-
+        angle += 0.5;
         // Clear the drawing area
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         // Reset the current matrix to the "identity"
         gl.glLoadIdentity();
+    
 
         // Move the "drawing cursor" around
-        gl.glTranslatef(0.0f, 0.0f, -12.0f);
-
-     Objek.Lapangan(drawable);
+        gl.glTranslatef(0.0f, 0.0f, -15.0f);
+        gl.glRotatef(-145, 1, 0, 0);
+        //gl.glRotatef(angle, 1, 0, 0);
+        gl.glPushMatrix();
+        Objek.Lapangan(drawable);
+        gl.glPopMatrix();
 
         gl.glFlush();
     }
@@ -101,4 +106,3 @@ public class GraphicFinal implements GLEventListener {
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
 }
-

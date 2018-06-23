@@ -9,6 +9,8 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
+import javax.media.opengl.glu.GLU;
+import javax.media.opengl.glu.GLUquadric;
 
 /**
  *
@@ -20,74 +22,104 @@ public class Objek {
         GL gl = drawable.getGL();
         double PI = 3.141592653589793;
         int i, radius, jumlah_titik, x_tengah, y_tengah;
-        
-        
+
         //lapangan
-        gl.glBegin(GL.GL_POLYGON);
+        gl.glBegin(GL.GL_POLYGON);  //  atas
         gl.glColor3f(0f, 1f, 0f);
-        gl.glVertex3f(-6.5f, -3.0f, 0.0f);
+        gl.glVertex3f(-6.5f, 0.5f, 0.0f);
+        gl.glVertex3f(-6.5f, 0.5f, -3.0f);
+        gl.glVertex3f(-6.5f, 0.5f, 3.0f);
+        gl.glVertex3f(6.5f, 0.5f, 3.0f);
+        gl.glVertex3f(6.5f, 0.5f, -3.0f);
+        gl.glVertex3f(-6.5f, 0.5f, -3.0f);
+        gl.glEnd();
+
+        gl.glBegin(GL.GL_POLYGON);  //  bawah
+        gl.glColor3f(0f, 1f, 0f);
         gl.glVertex3f(-6.5f, 0.0f, 0.0f);
-        gl.glVertex3f(-6.5f, 3.0f, 0.0f);
-        gl.glVertex3f(0.0f, 3.0f, 0.0f);
-        gl.glVertex3f(6.5f, 3.0f, 0.0f);
-        gl.glVertex3f(6.5f, -3.0f, 0.0f);
-
+        gl.glVertex3f(-6.5f, 0.0f, -3.0f);
+        gl.glVertex3f(-6.5f, 0.0f, 3.0f);
+        gl.glVertex3f(6.5f, 0.0f, 3.0f);
+        gl.glVertex3f(6.5f, 0.0f, -3.0f);
+        gl.glVertex3f(-6.5f, 0.0f, -3.0f);
+        gl.glEnd();
+//  
+        gl.glBegin(GL.GL_POLYGON); //samping kiri
+        gl.glColor3f(0f, 1f, 0f);
+        gl.glVertex3f(-6.5f, 0.5f, 0.0f);
+        gl.glVertex3f(-6.5f, 0.5f, -3.0f);
+        gl.glVertex3f(-6.5f, 0.5f, 3.0f);
+        gl.glVertex3f(-6.5f, 0.0f, 3.0f);
+        gl.glVertex3f(-6.5f, 0.0f, 3.0f);
+        gl.glVertex3f(-6.5f, 0.0f, -3.0f);
+        gl.glVertex3f(-6.5f, 0.5f, -3.0f);
         gl.glEnd();
 
-        gl.glBegin(GL.GL_POLYGON);
-        gl.glColor3f(0f, 1f, 0.1f);
-        gl.glVertex3f(-3.8f, -3.0f, 0.0f);
-        gl.glVertex3f(-3.8f, 0.0f, 0.0f);
-        gl.glVertex3f(-3.8f, 3.0f, 0.0f);
-        gl.glVertex3f(-1.5f, 3.0f, 0.0f);
-        gl.glVertex3f(-1.5f, -3.0f, 0.0f);
-
+        gl.glBegin(GL.GL_POLYGON); //samping kanan
+        gl.glColor3f(0f, 1f, 0f);
+        gl.glVertex3f(6.5f, 0.5f, 0.0f);
+        gl.glVertex3f(6.5f, 0.5f, -3.0f);
+        gl.glVertex3f(6.5f, 0.5f, 3.0f);
+        gl.glVertex3f(6.5f, 0.0f, 3.0f);
+        gl.glVertex3f(6.5f, 0.0f, 3.0f);
+        gl.glVertex3f(6.5f, 0.0f, -3.0f);
+        gl.glVertex3f(6.5f, 0.5f, -3.0f);
+        gl.glEnd();
+//  
+//  
+        gl.glBegin(GL.GL_POLYGON); //samping belakang
+        gl.glColor3f(0f, 1f, 0f);
+        gl.glVertex3f(-6.5f, 0.5f, 0.0f);
+        gl.glVertex3f(6.5f, 0.5f, 0.0f);
+        gl.glVertex3f(6.5f, 0.0f, 0.0f);
+        gl.glVertex3f(-6.5f, 0.0f, 0.0f);
+        gl.glVertex3f(-6.5f, 0.5f, 0.0f);
         gl.glEnd();
 
-        gl.glBegin(GL.GL_POLYGON);
-        gl.glColor3f(0f, 1f, 0.1f);
-        gl.glVertex3f(3.8f, -3.0f, 0.0f);
-        gl.glVertex3f(3.8f, 0.0f, 0.0f);
-        gl.glVertex3f(3.8f, 3.0f, 0.0f);
-        gl.glVertex3f(1.5f, 3.0f, 0.0f);
-        gl.glVertex3f(1.5f, -3.0f, 0.0f);
-
+        gl.glBegin(GL.GL_POLYGON); //samping depan
+        gl.glColor3f(0f, 1f, 0f);
+        gl.glVertex3f(-6.5f, 0.0f, -3.0f);
+        gl.glVertex3f(-6.5f, 0.5f, -3.0f);
+        gl.glVertex3f(6.5f, 0.5f, -3.0f);
+        gl.glVertex3f(6.5f, 0.0f, -3.0f);
+        gl.glVertex3f(-6.5f, 0.0f, -3.0f);
+        gl.glVertex3f(-6.5f, 0.5f, -3.0f);
         gl.glEnd();
 
-        //garis samping lapangan
+        //   garis samping lapangan
         gl.glBegin(GL.GL_LINE_STRIP);
         gl.glColor3f(1f, 1f, 1f);
-        gl.glVertex3f(-6.0f, -2.30f, 0.0f);
-        gl.glVertex3f(-6.0f, -2.30f, 0.0f);
+        gl.glVertex3f(-6.0f, 0.0f, -2.30f);
+        gl.glVertex3f(-6.0f, 0.0f, -2.30f);
         gl.glVertex3f(-6.0f, 0.0f, 0.0f);
-        gl.glVertex3f(-6.0f, 2.30f, 0.0f);
-        gl.glVertex3f(0.0f, 2.30f, 0.0f);
-        gl.glVertex3f(6.0f, 2.30f, 0.0f);
-        gl.glVertex3f(6.0f, -2.30f, 0.0f);
-        gl.glVertex3f(-6.0f, -2.30f, 0.0f);
+        gl.glVertex3f(-6.0f, 0.0f, 2.30f);
+        gl.glVertex3f(0.0f, 0.0f, 2.30f);
+        gl.glVertex3f(6.0f, 0.0f, 2.30f);
+        gl.glVertex3f(6.0f, 0.0f, -2.30f);
+        gl.glVertex3f(-6.0f, 0.0f, -2.30f);
         gl.glEnd();
 
         //garis kotak penalti kiri
         gl.glBegin(GL.GL_LINE_STRIP);
         gl.glColor3f(1f, 1f, 1f);
-        gl.glVertex3f(-6.0f, -1.5f, 0.0f);
-        gl.glVertex3f(-6.0f, -1.5f, 0.0f);
+        gl.glVertex3f(-6.0f, 0.0f, -1.5f);
+        gl.glVertex3f(-6.0f, 0.0f, -1.5f);
         gl.glVertex3f(-6.0f, 0.0f, 0.0f);
-        gl.glVertex3f(-6.0f, 1.5f, 0.0f);
-        gl.glVertex3f(-4.5f, 1.5f, 0.0f);
-        gl.glVertex3f(-4.5f, -1.5f, 0.0f);
-        gl.glVertex3f(-6.0f, -1.5f, 0.0f);
+        gl.glVertex3f(-6.0f, 0.0f, 1.5f);
+        gl.glVertex3f(-4.5f, 0.0f, 1.5f);
+        gl.glVertex3f(-4.5f, 0.0f, -1.5f);
+        gl.glVertex3f(-6.0f, 0.0f, -1.5f);
         gl.glEnd();
 
         gl.glBegin(GL.GL_LINE_STRIP);
         gl.glColor3f(1f, 1f, 1f);
-        gl.glVertex3f(-6.0f, -0.8f, 0.0f);
-        gl.glVertex3f(-6.0f, -0.8f, 0.0f);
+        gl.glVertex3f(-6.0f, 0.0f, -0.8f);
+        gl.glVertex3f(-6.0f, 0.0f, -0.8f);
         gl.glVertex3f(-6.0f, 0.0f, 0.0f);
-        gl.glVertex3f(-6.0f, 0.8f, 0.0f);
-        gl.glVertex3f(-5.5f, 0.8f, 0.0f);
-        gl.glVertex3f(-5.5f, -0.8f, 0.0f);
-        gl.glVertex3f(-6.0f, -0.8f, 0.0f);
+        gl.glVertex3f(-6.0f, 0.0f, 0.8f);
+        gl.glVertex3f(-5.5f, 0.0f, 0.8f);
+        gl.glVertex3f(-5.5f, 0.0f, -0.8f);
+        gl.glVertex3f(-6.0f, 0.0f, -0.8f);
         gl.glEnd();
 
         //titik putih sebelah kiri
@@ -105,43 +137,42 @@ public class Objek {
         //garis kotak penalti sebelah kanan
         gl.glBegin(GL.GL_LINE_STRIP);
         gl.glColor3f(1f, 1f, 1f);
-        gl.glVertex3f(6.0f, -1.5f, 0.0f);
-        gl.glVertex3f(6.0f, -1.5f, 0.0f);
+        gl.glVertex3f(6.0f, 0.0f, -1.5f);
+        gl.glVertex3f(6.0f, 0.0f, -1.5f);
         gl.glVertex3f(6.0f, 0.0f, 0.0f);
-        gl.glVertex3f(6.0f, 1.5f, 0.0f);
-        gl.glVertex3f(4.5f, 1.5f, 0.0f);
-        gl.glVertex3f(4.5f, -1.5f, 0.0f);
-        gl.glVertex3f(6.0f, -1.5f, 0.0f);
+        gl.glVertex3f(6.0f, 0.0f, 1.5f);
+        gl.glVertex3f(4.5f, 0.0f, 1.5f);
+        gl.glVertex3f(4.5f, 0.0f, -1.5f);
+        gl.glVertex3f(6.0f, 0.0f, -1.5f);
         gl.glEnd();
 
         gl.glBegin(GL.GL_LINE_STRIP);
         gl.glColor3f(1f, 1f, 1f);
-        gl.glVertex3f(6.0f, -0.8f, 0.0f);
-        gl.glVertex3f(6.0f, -0.8f, 0.0f);
+        gl.glVertex3f(6.0f, 0.0f, -0.8f);
+        gl.glVertex3f(6.0f, 0.0f, -0.8f);
         gl.glVertex3f(6.0f, 0.0f, 0.0f);
-        gl.glVertex3f(6.0f, 0.8f, 0.0f);
-        gl.glVertex3f(5.5f, 0.8f, 0.0f);
-        gl.glVertex3f(5.5f, -0.8f, 0.0f);
-        gl.glVertex3f(6.0f, -0.8f, 0.0f);
+        gl.glVertex3f(6.0f, 0.0f, 0.8f);
+        gl.glVertex3f(5.5f, 0.0f, 0.8f);
+        gl.glVertex3f(5.5f, 0.0f, -0.8f);
+        gl.glVertex3f(6.0f, 0.0f, -0.8f);
         gl.glEnd();
-
-
 
         //garis tengah lapangan
         gl.glBegin(GL.GL_LINE_STRIP);
         gl.glColor3f(1f, 1f, 1f);
-        gl.glVertex3f(0.0f, 2.30f, 0.0f);
-        gl.glVertex3f(0.0f, -2.30f, 0.0f);
-        gl.glVertex3f(0.0f, 2.30f, 0.0f);
+        gl.glVertex3f(0.0f, 0.0f, 2.30f);
+        gl.glVertex3f(0.0f, 0.0f, -2.30f);
+        gl.glVertex3f(0.0f, 0.0f, 2.30f);
 
         gl.glEnd();
 
         //lingkaran tengah lapangan
+        gl.glRotatef(-90, 1, 0, 0);
         gl.glBegin(GL.GL_LINE_LOOP);
         gl.glColor3f(1f, 1f, 1f);
 
         radius = 80;
-        jumlah_titik = 20;
+        jumlah_titik = 40;
         x_tengah = 0;
         y_tengah = 0;
         for (i = 0; i <= 360; i++) {
@@ -158,6 +189,35 @@ public class Objek {
         gl.glBegin(GL.GL_POINTS);
         gl.glVertex3f(0.0f, 0.0f, 0.0f);
         gl.glEnd();
-    }
 
+    }
+    
+    
+    static void Pemain(GL gl, GLU glu) {
+        //badan
+        float BODY_LENGTH = 0.35f;
+        float BODY_RADIUS = 0.2f;
+        float BODY_RADIUS1 = 0.0f;
+        int SLICES = 30;
+        int STACKS = 30;
+        GLUquadric q = glu.gluNewQuadric();
+        
+        gl.glRotatef(270, 1.0f, 0.0f, 0.0f);
+        glu.gluCylinder(q, BODY_RADIUS1, BODY_RADIUS, BODY_LENGTH, SLICES, STACKS);
+        gl.glTranslatef(0.0f, 0.0f, BODY_LENGTH);
+        glu.gluDisk(q, 0.0f, BODY_RADIUS, SLICES, STACKS);
+        
+        //kepala
+        gl.glRotatef(180, 1.0f, 0.0f, 0.0f);
+        double clip_plane1[] = {0.0, 0.0, -1.0, 0.0};
+        gl.glClipPlane(GL.GL_CLIP_PLANE1, clip_plane1, 0);
+        gl.glEnable(GL.GL_CLIP_PLANE1);
+
+        GLUquadric qd = glu.gluNewQuadric();
+        glu.gluSphere(qd, 0.3f, 60, 60);
+        glu.gluDeleteQuadric(qd);
+        gl.glDisable(GL.GL_CLIP_PLANE1);
+        glu.gluDisk(qd, 0.0f, 0.3f, 60, 60);
+
+    }
 }
