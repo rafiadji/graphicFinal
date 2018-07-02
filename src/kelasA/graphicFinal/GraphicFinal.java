@@ -99,7 +99,7 @@ public class GraphicFinal implements GLEventListener {
         gl.glPushMatrix();
         Objek.Lapangan(drawable);
         gl.glPopMatrix();
-
+        
         gl.glFlush();
     }
 
