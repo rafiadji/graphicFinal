@@ -1,107 +1,158 @@
+/*
+ * UASGrafis.java
+ *
+ * Created on 30. Juli 2008, 16:18
+ */
+
 package kelasA.graphicFinal;
 
 import com.sun.opengl.util.Animator;
-import java.awt.Frame;
+import java.awt.Dimension; 
+import java.awt.EventQueue;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener; 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.media.opengl.GL;
-import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLCanvas;
-import javax.media.opengl.GLEventListener;
-import javax.media.opengl.glu.GLU;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger; 
+import javax.media.opengl.GLCanvas; 
+import javax.media.opengl.GLCapabilities;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPopupMenu;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants; 
 
 /**
- * GraphicFinal.java <BR>
- * author:  Ninda Zulistyaningsih
- *          M Tegar Maha Putra 
- *          Rafi Pratama Adji
+ *
+ * @author cylab
+ * @author mbien
  */
-public class GraphicFinal implements GLEventListener {
+public class GraphicFinal extends JFrame {
 
-    float angle = 0;
-
-    public static void main(String[] args) {
-        Frame frame = new Frame("TA Grafis");
-        GLCanvas canvas = new GLCanvas();
-
-        canvas.addGLEventListener(new GraphicFinal());
-        frame.add(canvas);
-        frame.setSize(640, 480);
-        final Animator animator = new Animator(canvas);
-        frame.addWindowListener(new WindowAdapter() {
-
-            @Override
-            public void windowClosing(WindowEvent e) {
-                new Thread(new Runnable() {
-
-                    public void run() {
-                        animator.stop();
-                        System.exit(0);
-                    }
-                }).start();
-            }
-        });
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        animator.start();
-    }
-
-    public void init(GLAutoDrawable drawable) {
-        GL gl = drawable.getGL();
-        System.err.println("INIT GL IS: " + gl.getClass().getName());
-
-        gl.setSwapInterval(1);
-
-        gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        gl.glShadeModel(GL.GL_SMOOTH);
-//        gl.glShadeModel(GL.GL_3D_COLOR);
-//        gl.glEnable(GL.GL_LIGHTING);
-//        gl.glEnable(GL.GL_LIGHT0);
-        gl.glEnable(GL.GL_COLOR_MATERIAL);
-        gl.glEnable(GL.GL_DEPTH_TEST);
-        gl.glDepthFunc(GL.GL_LEQUAL);
-//        gl.glEnable(GL.GL_NORMALIZE);
-        gl.glHint(GL.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
-    }
-
-    public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
-        GL gl = drawable.getGL();
-        GLU glu = new GLU();
-
-        if (height <= 0) {
-            height = 1;
-        }
-        final float h = (float) width / (float) height;
-        gl.glViewport(0, 0, width, height);
-        gl.glMatrixMode(GL.GL_PROJECTION);
-        gl.glLoadIdentity();
-        glu.gluPerspective(45.0f, h, 1.0, 20.0);
-        gl.glMatrixMode(GL.GL_MODELVIEW);
-        gl.glLoadIdentity();
-    }
-
-    public void display(GLAutoDrawable drawable) {
-        GL gl = drawable.getGL();
-        GLU glu = new GLU();
-        angle += 0.5;
-        gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-        gl.glLoadIdentity();
-    
-        gl.glTranslatef(0.0f, 0.0f, -15.0f);
-        gl.glRotatef(-145, 1, 0, 0);
-//        gl.glRotatef(angle, 1, 0, 0);
-        gl.glPushMatrix();
-        Objek.Lapangan(drawable);
-        Objek.Pemain(gl, glu, 4);
-        gl.glPopMatrix();
-        
-<<<<<<< HEAD
-=======
-
->>>>>>> d49700845afa16685e59b0d0d98ac700091752ff
-        gl.glFlush();
-    }
-
-    public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
-    }
+  static {           
+  JPopupMenu.setDefaultLightWeightPopupEnabled(false); 
+    }  
+        private Animator animator; 
+ 
+    /** Creates new form MainFrame */ 
+    public GraphicFinal() {
+         initComponents();
+        final GLRenderer glrender = new GLRenderer();  
+       KeyListener mylisterner = new KeyListener() { 
+ 
+            public void keyTyped(KeyEvent e) {
+                 System.out.println("typed "+e.getKeyCode());             } 
+ 
+            public void keyPressed(KeyEvent e) {  
+               System.out.println("pressed "+e.getKeyCode()); 
+                glrender.Key_Pressed(e.getKeyCode());
+                 canvas.repaint();   
+                                            } 
+ 
+            public void keyReleased(KeyEvent e) {
+                 System.out.println("released "+e.getKeyCode());
+             }
+         }; 
+ 
+        canvas.addGLEventListener(glrender);
+                  Timer mytimer = new Timer(); 
+        TimerTask mytimertask = new TimerTask() { 
+                         @Override  
+           public void run() { 
+                canvas.repaint(); 
+            } 
+        };    
+              mytimer.schedule(mytimertask, 100, 100);
+         addKeyListener(mylisterner);
+         animator = new Animator(canvas);
+         this.setLocationRelativeTo(null);
+         this.setSize(720,500);  
+       animator = new Animator(canvas);
+         canvas.setMinimumSize(new Dimension());
+                  this.addWindowListener(new WindowAdapter() { 
+ 
+            @Override 
+            public void windowClosing(WindowEvent e) {     
+            new Thread(new Runnable() { 
+ 
+                    public void run() { 
+                        animator.stop();     
+                    System.exit(0);  
+                   }   
+              }).start();  
+           }    
+     });  
+   } 
+ 
+    @Override
+     public void setVisible(boolean show){    
+     if(!show)   
+          animator.stop();    
+     super.setVisible(show);      
+   if(!show) 
+            animator.start();    
+ } 
+ 
+    @SuppressWarnings("unchecked")  
+   private void initComponents() {   
+      JLabel label = new JLabel();
+         canvas = new GLCanvas(createGLCapabilites()); 
+ 
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); 
+ 
+        label.setText("Responsi 2"); 
+ 
+        GroupLayout layout = new GroupLayout(getContentPane()); 
+        getContentPane().setLayout(layout); 
+        layout.setHorizontalGroup(    
+         layout.createParallelGroup(Alignment.LEADING)   
+          .addGroup(layout.createSequentialGroup()      
+           .addContainerGap() 
+                .addGroup(layout.createParallelGroup(Alignment.LEADING)  
+                   .addComponent(canvas, GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                     .addComponent(label)) 
+                .addContainerGap())
+                  ); 
+        layout.setVerticalGroup(   
+          layout.createParallelGroup(Alignment.LEADING)
+             .addGroup(layout.createSequentialGroup()  
+               .addContainerGap()   
+              .addComponent(label)       
+          .addPreferredGap(ComponentPlacement.RELATED)     
+            .addComponent(canvas, GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                 .addContainerGap())    
+              ); 
+ 
+        pack();
+     } 
+    private GLCapabilities createGLCapabilites() {  
+                GLCapabilities capabilities = new GLCapabilities();
+         capabilities.setHardwareAccelerated(true); 
+ 
+        // try to enable 2x anti aliasing - should be supported on most hardware    
+     capabilities.setNumSamples(2);
+         capabilities.setSampleBuffers(true);   
+               return capabilities; 
+    }     
+     public static void main(String args[]) {       
+  EventQueue.invokeLater(new Runnable() {   
+          public void run() {
+             try{  
+                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); 
+               }catch(Exception ex) { 
+                    Logger.getLogger(getClass().getName()).log(Level.INFO, "can not enable system look and feel", ex);    
+             } 
+ 
+                GraphicFinal frame = new GraphicFinal();  
+               frame.setVisible(true);   
+          }   
+      });    
+ }
+     private GLCanvas canvas; 
 }
