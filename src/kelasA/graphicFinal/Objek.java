@@ -208,26 +208,27 @@ public class Objek {
         float BODY_LENGTH = 0.35f;
         float BODY_RADIUS = 0.2f;
         float BODY_RADIUS1 = 0.0f;
+
         int SLICES = 30;
         int STACKS = 30;
         GLUquadric q = glu.gluNewQuadric();
-        
+
         gl.glRotatef(270, 1.0f, 0.0f, 0.0f);
-        glu.gluCylinder(q, BODY_RADIUS1, BODY_RADIUS, BODY_LENGTH, SLICES, STACKS);
+        glu.gluCylinder(q, BODY_RADIUS1, BODY_RADIUS,BODY_LENGTH, SLICES, STACKS);
         gl.glTranslatef(0.0f, 0.0f, BODY_LENGTH);
-        glu.gluDisk(q, 0.0f, BODY_RADIUS, SLICES, STACKS);
+        glu.gluDisk(q, 0.0f, BODY_RADIUS, SLICES, STACKS); 
         
         //kepala
         gl.glRotatef(180, 1.0f, 0.0f, 0.0f);
         double clip_plane1[] = {0.0, 0.0, -1.0, 0.0};
         gl.glClipPlane(GL.GL_CLIP_PLANE1, clip_plane1, 0);
         gl.glEnable(GL.GL_CLIP_PLANE1);
-
+        // drawing a sphere
         GLUquadric qd = glu.gluNewQuadric();
-        glu.gluSphere(qd, 0.3f, 60, 60);
+        glu.gluSphere(qd, 0.2f, 60, 60);
         glu.gluDeleteQuadric(qd);
         gl.glDisable(GL.GL_CLIP_PLANE1);
-        glu.gluDisk(qd, 0.0f, 0.3f, 60, 60);
+        glu.gluDisk(qd, 0.0f, 0.2f, 60, 60);
 
     }
 }
