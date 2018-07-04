@@ -89,80 +89,81 @@ public class Objek {
         //   garis samping lapangan
         gl.glBegin(GL.GL_LINE_STRIP);
         gl.glColor3f(1f, 1f, 1f);
-        gl.glVertex3f(-6.0f, 0.0f, -2.30f);
-        gl.glVertex3f(-6.0f, 0.0f, -2.30f);
-        gl.glVertex3f(-6.0f, 0.0f, 0.0f);
-        gl.glVertex3f(-6.0f, 0.0f, 2.30f);
-        gl.glVertex3f(0.0f, 0.0f, 2.30f);
-        gl.glVertex3f(6.0f, 0.0f, 2.30f);
-        gl.glVertex3f(6.0f, 0.0f, -2.30f);
-        gl.glVertex3f(-6.0f, 0.0f, -2.30f);
+        gl.glVertex3f(-6.0f, -0.1f, -2.30f);
+        gl.glVertex3f(-6.0f, -0.1f, -2.30f);
+        gl.glVertex3f(-6.0f, -0.1f, 0.0f);
+        gl.glVertex3f(-6.0f, -0.1f, 2.30f);
+        gl.glVertex3f(0.0f, -0.1f, 2.30f);
+        gl.glVertex3f(6.0f, -0.1f, 2.30f);
+        gl.glVertex3f(6.0f, -0.1f, -2.30f);
+        gl.glVertex3f(-6.0f, -0.1f, -2.30f);
         gl.glEnd();
 
         //garis kotak penalti kiri
         gl.glBegin(GL.GL_LINE_STRIP);
         gl.glColor3f(1f, 1f, 1f);
-        gl.glVertex3f(-6.0f, 0.0f, -1.5f);
-        gl.glVertex3f(-6.0f, 0.0f, -1.5f);
-        gl.glVertex3f(-6.0f, 0.0f, 0.0f);
-        gl.glVertex3f(-6.0f, 0.0f, 1.5f);
-        gl.glVertex3f(-4.5f, 0.0f, 1.5f);
-        gl.glVertex3f(-4.5f, 0.0f, -1.5f);
-        gl.glVertex3f(-6.0f, 0.0f, -1.5f);
+        gl.glVertex3f(-6.0f, -0.1f, -1.5f);
+        gl.glVertex3f(-6.0f, -0.1f, -1.5f);
+        gl.glVertex3f(-6.0f, -0.1f, 0.0f);
+        gl.glVertex3f(-6.0f, -0.1f, 1.5f);
+        gl.glVertex3f(-4.5f, -0.1f, 1.5f);
+        gl.glVertex3f(-4.5f, -0.1f, -1.5f);
+        gl.glVertex3f(-6.0f, -0.1f, -1.5f);
         gl.glEnd();
 
         gl.glBegin(GL.GL_LINE_STRIP);
         gl.glColor3f(1f, 1f, 1f);
-        gl.glVertex3f(-6.0f, 0.0f, -0.8f);
-        gl.glVertex3f(-6.0f, 0.0f, -0.8f);
-        gl.glVertex3f(-6.0f, 0.0f, 0.0f);
-        gl.glVertex3f(-6.0f, 0.0f, 0.8f);
-        gl.glVertex3f(-5.5f, 0.0f, 0.8f);
-        gl.glVertex3f(-5.5f, 0.0f, -0.8f);
-        gl.glVertex3f(-6.0f, 0.0f, -0.8f);
+        gl.glVertex3f(-6.0f, -0.1f, -0.8f);
+        gl.glVertex3f(-6.0f, -0.1f, -0.8f);
+        gl.glVertex3f(-6.0f, -0.1f, 0.0f);
+        gl.glVertex3f(-6.0f, -0.1f, 0.8f);
+        gl.glVertex3f(-5.5f, -0.1f, 0.8f);
+        gl.glVertex3f(-5.5f, -0.1f, -0.8f);
+        gl.glVertex3f(-6.0f, -0.1f, -0.8f);
         gl.glEnd();
 
         //titik putih sebelah kiri
-        gl.glPointSize(3.0f);  //menentukan ukuran titik
+        gl.glPointSize(4.0f);  //menentukan ukuran titik
         gl.glBegin(GL.GL_POINTS);
-        gl.glVertex3f(-5.0f, 0.0f, 0.0f);
+        gl.glVertex3f(-5.0f, -0.1f, 0.0f);
         gl.glEnd();
 
         //titik putih sebelah kanan
-        gl.glPointSize(3.0f);  //menentukan ukuran titik
+        gl.glPointSize(4.0f);  //menentukan ukuran titik
         gl.glBegin(GL.GL_POINTS);
-        gl.glVertex3f(5.0f, 0.0f, 0.0f);
+        gl.glVertex3f(5.0f, -0.1f, 0.0f);
         gl.glEnd();
 
         //garis kotak penalti sebelah kanan
+        gl.glLineWidth(3.0f);
         gl.glBegin(GL.GL_LINE_STRIP);
         gl.glColor3f(1f, 1f, 1f);
-        gl.glVertex3f(6.0f, 0.0f, -1.5f);
-        gl.glVertex3f(6.0f, 0.0f, -1.5f);
-        gl.glVertex3f(6.0f, 0.0f, 0.0f);
-        gl.glVertex3f(6.0f, 0.0f, 1.5f);
-        gl.glVertex3f(4.5f, 0.0f, 1.5f);
-        gl.glVertex3f(4.5f, 0.0f, -1.5f);
-        gl.glVertex3f(6.0f, 0.0f, -1.5f);
+        gl.glVertex3f(6.0f, -0.1f, -1.5f);
+        gl.glVertex3f(6.0f, -0.1f, -1.5f);
+        gl.glVertex3f(6.0f, -0.1f, 0.0f);
+        gl.glVertex3f(6.0f, -0.1f, 1.5f);
+        gl.glVertex3f(4.5f, -0.1f, 1.5f);
+        gl.glVertex3f(4.5f, -0.1f, -1.5f);
+        gl.glVertex3f(6.0f, -0.1f, -1.5f);
         gl.glEnd();
 
         gl.glBegin(GL.GL_LINE_STRIP);
         gl.glColor3f(1f, 1f, 1f);
-        gl.glVertex3f(6.0f, 0.0f, -0.8f);
-        gl.glVertex3f(6.0f, 0.0f, -0.8f);
-        gl.glVertex3f(6.0f, 0.0f, 0.0f);
-        gl.glVertex3f(6.0f, 0.0f, 0.8f);
-        gl.glVertex3f(5.5f, 0.0f, 0.8f);
-        gl.glVertex3f(5.5f, 0.0f, -0.8f);
-        gl.glVertex3f(6.0f, 0.0f, -0.8f);
+        gl.glVertex3f(6.0f, -0.1f, -0.8f);
+        gl.glVertex3f(6.0f, -0.1f, -0.8f);
+        gl.glVertex3f(6.0f, -0.1f, 0.0f);
+        gl.glVertex3f(6.0f, -0.1f, 0.8f);
+        gl.glVertex3f(5.5f, -0.1f, 0.8f);
+        gl.glVertex3f(5.5f, -0.1f, -0.8f);
+        gl.glVertex3f(6.0f, -0.1f, -0.8f);
         gl.glEnd();
 
         //garis tengah lapangan
         gl.glBegin(GL.GL_LINE_STRIP);
         gl.glColor3f(1f, 1f, 1f);
-        gl.glVertex3f(0.0f, 0.0f, 2.30f);
-        gl.glVertex3f(0.0f, 0.0f, -2.30f);
-        gl.glVertex3f(0.0f, 0.0f, 2.30f);
+        gl.glVertex3f(0.0f, -0.1f, 2.30f);
+        gl.glVertex3f(0.0f, -0.1f, -2.30f);
+        gl.glVertex3f(0.0f, -0.1f, 2.30f);
 
         gl.glEnd();
 
@@ -193,8 +194,31 @@ public class Objek {
     }
     
     
-    static void Pemain(GL gl, GLU glu) {
+    static void Pemain(GL gl, GLU glu, int tipe) {
+        if(tipe == 1){
+            gl.glColor3f(1, 1, 0);
+        }else if(tipe == 2){
+            gl.glColor3f(0, 1, 0);
+        }else if(tipe == 3){
+            gl.glColor3f(0, 0, 1);
+        }else if(tipe == 4){
+            gl.glColor3f(1, 0, 0);
+        }
+        //badan
+        float BODY_LENGTH = 0.35f;
+        float BODY_RADIUS = 0.2f;
+        float BODY_RADIUS1 = 0.0f;
+        int SLICES = 30;
+        int STACKS = 30;
+        GLUquadric q = glu.gluNewQuadric();
+        
+        gl.glRotatef(270, 1.0f, 0.0f, 0.0f);
+        glu.gluCylinder(q, BODY_RADIUS1, BODY_RADIUS, BODY_LENGTH, SLICES, STACKS);
+        gl.glTranslatef(0.0f, 0.0f, BODY_LENGTH);
+        glu.gluDisk(q, 0.0f, BODY_RADIUS, SLICES, STACKS);
+        
         //kepala
+        gl.glRotatef(180, 1.0f, 0.0f, 0.0f);
         double clip_plane1[] = {0.0, 0.0, -1.0, 0.0};
         gl.glClipPlane(GL.GL_CLIP_PLANE1, clip_plane1, 0);
         gl.glEnable(GL.GL_CLIP_PLANE1);
@@ -204,18 +228,6 @@ public class Objek {
         glu.gluDeleteQuadric(qd);
         gl.glDisable(GL.GL_CLIP_PLANE1);
         glu.gluDisk(qd, 0.0f, 0.3f, 60, 60);
-
-        //badan
-        float BODY_LENGTH = 0.5f;
-        float BODY_RADIUS = 0.2f;
-        float BODY_RADIUS1 = 0.0f;
-        int SLICES = 30;
-        int STACKS = 30;
-        GLUquadric q = glu.gluNewQuadric();
-
-        glu.gluCylinder(q, BODY_RADIUS1, BODY_RADIUS, BODY_LENGTH, SLICES, STACKS);
-        gl.glTranslatef(0.0f, 0.0f, BODY_LENGTH);
-        glu.gluDisk(q, 0.0f, BODY_RADIUS, SLICES, STACKS);
 
     }
 }

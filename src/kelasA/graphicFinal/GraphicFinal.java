@@ -12,10 +12,9 @@ import javax.media.opengl.glu.GLU;
 
 /**
  * GraphicFinal.java <BR>
- * author: Ninda Zulistyaningsih
- * <P>
- * M Tegar Maha Putra This version is equal to Brian Paul's version 1.2
- * 1999/10/21
+ * author:  Ninda Zulistyaningsih
+ *          M Tegar Maha Putra 
+ *          Rafi Pratama Adji
  */
 public class GraphicFinal implements GLEventListener {
 
@@ -33,9 +32,6 @@ public class GraphicFinal implements GLEventListener {
 
             @Override
             public void windowClosing(WindowEvent e) {
-                // Run this on another thread than the AWT event queue to
-                // make sure the call to Animator.stop() completes before
-                // exiting
                 new Thread(new Runnable() {
 
                     public void run() {
@@ -45,33 +41,34 @@ public class GraphicFinal implements GLEventListener {
                 }).start();
             }
         });
-        // Center frame
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         animator.start();
     }
 
     public void init(GLAutoDrawable drawable) {
-        // Use debug pipeline
-        // drawable.setGL(new DebugGL(drawable.getGL()));
-
         GL gl = drawable.getGL();
         System.err.println("INIT GL IS: " + gl.getClass().getName());
 
-        // Enable VSync
         gl.setSwapInterval(1);
 
-        // Setup the drawing area and shading mode
         gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        gl.glShadeModel(GL.GL_SMOOTH); // try setting this to GL_FLAT and see what happens.
+        gl.glShadeModel(GL.GL_SMOOTH);
+//        gl.glShadeModel(GL.GL_3D_COLOR);
+//        gl.glEnable(GL.GL_LIGHTING);
+//        gl.glEnable(GL.GL_LIGHT0);
+        gl.glEnable(GL.GL_COLOR_MATERIAL);
+        gl.glEnable(GL.GL_DEPTH_TEST);
+        gl.glDepthFunc(GL.GL_LEQUAL);
+//        gl.glEnable(GL.GL_NORMALIZE);
+        gl.glHint(GL.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
         GL gl = drawable.getGL();
         GLU glu = new GLU();
 
-        if (height <= 0) { // avoid a divide by zero error!
-
+        if (height <= 0) {
             height = 1;
         }
         final float h = (float) width / (float) height;
@@ -85,21 +82,23 @@ public class GraphicFinal implements GLEventListener {
 
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
+        GLU glu = new GLU();
         angle += 0.5;
-        // Clear the drawing area
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-        // Reset the current matrix to the "identity"
         gl.glLoadIdentity();
     
-
-        // Move the "drawing cursor" around
         gl.glTranslatef(0.0f, 0.0f, -15.0f);
         gl.glRotatef(-145, 1, 0, 0);
-        gl.glRotatef(angle, 1, 0, 0);
+//        gl.glRotatef(angle, 1, 0, 0);
         gl.glPushMatrix();
         Objek.Lapangan(drawable);
+        Objek.Pemain(gl, glu, 4);
         gl.glPopMatrix();
         
+<<<<<<< HEAD
+=======
+
+>>>>>>> d49700845afa16685e59b0d0d98ac700091752ff
         gl.glFlush();
     }
 
