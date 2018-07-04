@@ -179,7 +179,7 @@ direction digunakan untuk menentukan arah.
                 Lx, Ly, Lz,
                 Sumbu_y.x, Sumbu_y.y, Sumbu_y.z);
         gl.glTranslatef(0.0f, 0.0f, -15.0f);
-        gl.glRotatef(-145, 1, 0, 0);
+        gl.glRotatef(-90, 1, 0, 0);
 //        gl.glPushMatrix();
         Objek.Lapangan(drawable);
 //        gl.glPopMatrix();
