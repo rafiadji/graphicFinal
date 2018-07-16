@@ -75,7 +75,7 @@ public class GLRenderer implements GLEventListener {
     float angle_vertikal = 0f;
     float angle_vertikal2 = 0f;
     float formasi = 0f;
-    boolean ori = true, formasiawal = false, formasimenyerang = false, formasibertahan = false, kamera = false;
+    boolean ori = true, formasiawal = false, formasimenyerang = false, formasibertahan = false, kamera = false, kamera2 = false;
     vector Sumbu_z = new vector(0f, 0f, -1f);//deklarasi awal vektor untuk maju & mundur
     vector Sumbu_x = new vector(1f, 0f, 0f);//deklarasi awal vektor untuk gerakan ke kanan & kiri
     vector Sumbu_y = new vector(0f, 1f, 0f);//deklarasi awal vetor untuk gerakan naik & turun
@@ -217,11 +217,17 @@ public class GLRenderer implements GLEventListener {
             gl.glPushMatrix();
         }
         Objek.Lapangan(drawable);
-        setPemain(awal, gl, glu);
 
         if (kamera) {
-            setPemain(menyerang, gl, glu);
             formasi = -45f;
+        }
+        if (kamera2) {
+            formasi = 0f;
+        } 
+        if (formasimenyerang){
+            setPemain(menyerang, gl, glu);
+        } if (formasiawal){
+            setPemain(awal, gl, glu);
         }
         gl.glFlush();
     }
@@ -248,16 +254,22 @@ public class GLRenderer implements GLEventListener {
                 kamera = true;
             }
         } else if (keyCode == 50) {
+             if (kamera2) {
+                kamera2 = false;
+            } else {
+                kamera2 = true;
+            }
+        } else if (keyCode == 51) {
             if (formasimenyerang) {
                 formasimenyerang = false;
             } else {
                 formasimenyerang = true;
             }
-        } else if (keyCode == 51) {
-            if (formasibertahan) {
-                formasibertahan = false;
+        }else if (keyCode == 52) {
+            if (formasiawal) {
+                formasiawal = false;
             } else {
-                formasibertahan = true;
+                formasiawal = true;
             }
             if (keyCode == 87) {
                 vectorMovement(Sumbu_z, 2f, 1f);
