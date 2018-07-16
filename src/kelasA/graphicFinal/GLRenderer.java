@@ -163,6 +163,15 @@ public class GLRenderer implements GLEventListener {
         gl.glLoadIdentity();
     }
 
+    float[][] awal = {
+        {-5.5f, 0f, 0f, 1},
+        {-3.6f, 0f, 1.8f, 2},
+        {-4.0f, 0f, 0.8f, 2},
+        {-4.0f, 0f, 0f, 2},
+        {-4.0f, 0f, -0.8f, 2},
+        {-3.6f, 0f, -1.8f, 2}
+    };
+    
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
         GLU glu = new GLU();
@@ -173,14 +182,21 @@ public class GLRenderer implements GLEventListener {
                 Sumbu_y.x, Sumbu_y.y, Sumbu_y.z);
         gl.glTranslatef(0.0f, 0.0f, -15.0f);
         gl.glRotatef(-90, 1, 0, 0);
-//        gl.glPushMatrix();
+        for (int i = 0; i <= 11; i++) {
+            gl.glPushMatrix();
+        }
         Objek.Lapangan(drawable);
+        for (int i = 0; i < awal.length; i++) {
+            System.out.println(awal[i][0] + " " + awal[i][1]  + " " + awal[i][2] + " " + awal[i][3]);
+            gl.glPopMatrix();
+            gl.glTranslatef(awal[i][0], awal[i][1], awal[i][2]);
+            gl.glRotatef(180, 1, 0, 0);
+            Objek.Pemain(gl, glu, awal[i][3]);
+        }
 //        gl.glPopMatrix();
-//        gl.glPushMatrix();
-        gl.glTranslatef(-5.5f, 0f, 0f);
-        gl.glRotatef(-90, 1, 0, 0);
-        Objek.Pemain(gl, glu, 1);
-//        gl.glPopMatrix();
+//        gl.glTranslatef(-5.5f, 0f, 0f);
+//        gl.glRotatef(180, 1, 0, 0);
+//        Objek.Pemain(gl, glu, 1);
         gl.glFlush();
     }
 
