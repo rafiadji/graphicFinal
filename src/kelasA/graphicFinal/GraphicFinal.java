@@ -106,7 +106,7 @@ public class GraphicFinal extends JFrame {
  
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); 
  
-        label.setText("Responsi 2"); 
+        label.setText("UAS Grafis"); 
  
         GroupLayout layout = new GroupLayout(getContentPane()); 
         getContentPane().setLayout(layout); 

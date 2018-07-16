@@ -198,11 +198,11 @@ public class Objek {
         if(tipe == 1){
             gl.glColor3f(1, 1, 0);
         }else if(tipe == 2){
-            gl.glColor3f(0, 1, 0);
+            gl.glColor3f(1, 0.1f, 0);
         }else if(tipe == 3){
-            gl.glColor3f(0, 0, 1);
+            gl.glColor3f(1, 0.1f, 0);
         }else if(tipe == 4){
-            gl.glColor3f(1, 0, 0);
+            gl.glColor3f(1, 0.1f, 0);
         }
         //badan
         float BODY_LENGTH = 0.35f;

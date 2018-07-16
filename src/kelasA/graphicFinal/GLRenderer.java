@@ -14,6 +14,7 @@ public class GLRenderer implements GLEventListener {
 //class vector untuk memudah vektor-isasi
 
     float angle = 0;
+    float direction = 0;
 
     class vector {
 
@@ -50,7 +51,7 @@ public class GLRenderer implements GLEventListener {
         }
     }
     vector depanBelakang = new vector(0f, 0f, -1f);//deklarasi awal vektor untuk maju & mundur
-    vector samping = new vector(0f, 1f, 0f);//deklarasi awal vektor untuk gerakan ke kanan & kiri
+    vector samping = new vector(1f, 0f, 0f);//deklarasi awal vektor untuk gerakan ke kanan & kiri
     vector vertikal = new vector(0f, 1f, 0f);//deklarasi awal vetor untuk gerakan naik & turun
     float Cx = 0, Cy = 2.5f, Cz = 0;
     float Lx = 0, Ly = 2.5f, Lz = -20f;
@@ -60,8 +61,8 @@ public class GLRenderer implements GLEventListener {
     float angle_samping2 = 0f;
     float angle_vertikal = 0f;
     float angle_vertikal2 = 0f;
-    float silinderAngle = 90f;
-    boolean ori = true, silinder = false, kamera = false;
+    float formasi = 90f;
+    boolean ori = true, formasiawal = false, formasimenyerang = false, formasibertahan = false, kamera = false;
     vector Sumbu_z = new vector(0f, 0f, -1f);//deklarasi awal vektor untuk maju & mundur
     vector Sumbu_x = new vector(1f, 0f, 0f);//deklarasi awal vektor untuk gerakan ke kanan & kiri
     vector Sumbu_y = new vector(0f, 1f, 0f);//deklarasi awal vetor untuk gerakan naik & turun
@@ -122,7 +123,7 @@ gunakan -1 untuk arah berlawanan dengan vektor awal
 
         gl.setSwapInterval(1);
 
-        gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         gl.glShadeModel(GL.GL_SMOOTH);
 //        gl.glShadeModel(GL.GL_3D_COLOR);
 //        gl.glEnable(GL.GL_LIGHTING);
@@ -153,20 +154,297 @@ gunakan -1 untuk arah berlawanan dengan vektor awal
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
         GLU glu = new GLU();
-        angle += 0.5;
+        angle += 1;
+        direction = 1;
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         gl.glLoadIdentity();
         glu.gluLookAt(Cx, Cy, Cz,
                 Lx, Ly, Lz,
                 vertikal.x, vertikal.y, vertikal.z);
-        gl.glTranslatef(0.0f, 0.0f, -15.0f);
-        gl.glRotatef(-145, 1, 0, 0);
+
+        gl.glTranslatef(0.0f, 3.0f, -15.0f);
+        gl.glRotatef(-90, 1, 0, 0);
 //        gl.glRotatef(angle, 1, 0, 0);
         gl.glPushMatrix();
         Objek.Lapangan(drawable);
-        Objek.Pemain(gl, glu, 4);
         gl.glPopMatrix();
-        gl.glFlush();
+
+//         gl.glPushMatrix();
+//        gl.glTranslatef(-5.7f, 0.0f, 0.2f);
+//        gl.glRotatef(-145, 1, 0, 0);
+//        Objek.Pemain(gl, glu, 1);
+//        gl.glPopMatrix();
+//        
+//        gl.glPushMatrix();
+//        gl.glTranslatef(-3.5f, 0.0f, -0.9f);
+//        gl.glRotatef(-145, 1, 0, 0);
+//        Objek.Pemain(gl, glu, 2);
+//        gl.glPopMatrix();
+//        
+//        gl.glPushMatrix();
+//        gl.glTranslatef(-3.2f, 0.0f, 0.2f);
+//        gl.glRotatef(-145, 1, 0, 0);
+//        Objek.Pemain(gl, glu, 2);
+//        gl.glPopMatrix();
+//        
+//        gl.glPushMatrix();
+//        gl.glTranslatef(-3.5f, 0.0f, 1.2f);
+//        gl.glRotatef(-145, 1, 0, 0);
+//        Objek.Pemain(gl, glu, 2);
+//        gl.glPopMatrix();
+//        
+//        gl.glPushMatrix();
+//        gl.glTranslatef(-2.6f, 0.0f, 2.0f);
+//        gl.glRotatef(-145, 1, 0, 0);
+//        Objek.Pemain(gl, glu, 2);
+//        gl.glPopMatrix();
+//        
+//        gl.glPushMatrix();
+//        gl.glTranslatef(-2.6f, 0.0f, -1.6f);
+//        gl.glRotatef(-145, 1, 0, 0);
+//        Objek.Pemain(gl, glu, 2);
+//        gl.glPopMatrix();
+//        
+//        gl.glPushMatrix();
+//        gl.glTranslatef(0.0f, 0.0f, 0.9f);
+//        gl.glRotatef(-145, 1, 0, 0);
+//        Objek.Pemain(gl, glu, 3);
+//        gl.glPopMatrix();
+//        
+//        gl.glPushMatrix();
+//         gl.glTranslatef(0.0f, 0.0f, -0.7f);
+//        gl.glRotatef(-145, 1, 0, 0);
+//        Objek.Pemain(gl, glu, 3);
+//        gl.glPopMatrix();
+//        
+//         gl.glPushMatrix();
+//         gl.glTranslatef(2.0f, 0.0f, -1.6f);
+//        gl.glRotatef(-145, 1, 0, 0);
+//        Objek.Pemain(gl, glu, 3);
+//        gl.glPopMatrix();
+//       
+//        gl.glPushMatrix();
+//         gl.glTranslatef(2.0f, 0.0f, 2.0f);
+//        gl.glRotatef(-145, 1, 0, 0);
+//        Objek.Pemain(gl, glu, 3);
+//        gl.glPopMatrix();
+//        
+//        gl.glPushMatrix();
+//         gl.glTranslatef(4.5f, 0.0f, 0.2f);
+//        gl.glRotatef(-145, 1, 0, 0);
+//        Objek.Pemain(gl, glu, 4);
+//        gl.glPopMatrix();
+//        gl.glFlush();
+        if (formasiawal) {
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-5.7f, 0.0f, 0.2f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 1);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-3.5f, 0.0f, -0.9f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 2);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-3.2f, 0.0f, 0.2f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 2);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-3.5f, 0.0f, 1.2f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 2);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-2.6f, 0.0f, 2.0f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 2);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-2.6f, 0.0f, -1.6f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 2);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(0.0f, 0.0f, 0.9f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 3);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(0.0f, 0.0f, -0.7f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 3);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(2.0f, 0.0f, -1.6f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 3);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(2.0f, 0.0f, 2.0f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 3);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(4.5f, 0.0f, 0.2f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 4);
+            gl.glPopMatrix();
+            gl.glFlush();
+        }
+        
+  if (formasimenyerang) {
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-5.7f, 0.0f, 0.2f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 1);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-3.5f, 0.0f, -0.9f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 2);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-3.2f, 0.0f, 0.2f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 2);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-3.5f, 0.0f, 1.2f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 2);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(2.0f, 0.0f, 2.0f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 2);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(2.0f, 0.0f, -1.6f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 2);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(0.0f, 0.0f, 0.9f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 3);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(0.0f, 0.0f, -0.7f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 3);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(4.5f, 0.0f, -0.4f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 3);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(2.0f, 0.0f, 0.2f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 3);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(5.0f, 0.0f, 0.6f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 4);
+            gl.glPopMatrix();
+            gl.glFlush();
+        }
+  
+  if (formasibertahan) {
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-5.7f, 0.0f, 0.2f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 1);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-4.8f, 0.0f, -0.9f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 2);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-4.6f, 0.0f, 0.2f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 2);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-4.8f, 0.0f, 1.2f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 2);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-4.5f, 0.0f, 2.0f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 2);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-4.5f, 0.0f, -1.6f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 2);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-3.0f, 0.0f, 0.2f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 3);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-1.8f, 0.0f, 0.2f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 3);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-1.0f, 0.0f, -1.6f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 3);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(-1.0f, 0.0f, 2.0f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 3);
+            gl.glPopMatrix();
+
+            gl.glPushMatrix();
+            gl.glTranslatef(2.0f, 0.0f, 0.2f);
+            gl.glRotatef(-180, 1, 0, 0);
+            Objek.Pemain(gl, glu, 4);
+            gl.glPopMatrix();
+            gl.glFlush();
+        }
+  gl.glFlush();
     }
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
@@ -188,39 +466,29 @@ gunakan -1 untuk arah berlawanan dengan vektor awal
             vectorMovement(vertikal, 2f, 1f);
         } else if (keyCode == 40) {
             vectorMovement(vertikal, 2f, -1f);
-        } else if (keyCode == 65) {
-            angle_vertikal += 15f;
-            samping.vectorRotation(vertikal, angle_vertikal - angle_vertikal2);
-            depanBelakang.vectorRotation(vertikal, angle_vertikal - angle_vertikal2);
-            cameraRotation(vertikal, angle_vertikal - angle_vertikal2);
-            angle_vertikal2 = angle_vertikal;
-        } else if (keyCode == 66) {
-            angle_samping -= 15f;
-            depanBelakang.vectorRotation(samping, angle_samping - angle_samping2);
-            cameraRotation(samping, angle_samping - angle_samping2);
-            angle_samping2 = angle_samping;
         } else if (keyCode == 67) {
             angle_depanBelakang += 90f;
             samping.vectorRotation(depanBelakang, angle_depanBelakang - angle_depanBelakang2);
             vertikal.vectorRotation(depanBelakang, angle_depanBelakang - angle_depanBelakang2);
             angle_depanBelakang2 = angle_depanBelakang;
-        } else if (keyCode == 71) {
-            sudut_z += 15f;
-            float sudut_zsudut_z2 = 0;
-            Sumbu_z.vectorRotation(Sumbu_y, sudut_zsudut_z2); //memutar vector sumbu z terhadap x (target,patokan)
-            Sumbu_x.vectorRotation(Sumbu_y, sudut_zsudut_z2);
-            cameraRotation(Sumbu_y, sudut_z - sudut_z2);
-//look at
-            sudut_z2 = sudut_z;
-        } else if (keyCode == 72) {
-            sudut_y += 15f; //sudut terhadap z
-            float sudut_zsudut_z2 = 0;
-            Sumbu_y.vectorRotation(Sumbu_x, sudut_zsudut_z2); //memutar vector sumbu z terhadap x (target,patokan)
-            Sumbu_z.vectorRotation(Sumbu_x, sudut_zsudut_z2);
-            cameraRotation(Sumbu_x, sudut_y - sudut_y2);
-//look at
-            sudut_y2 = sudut_y;
-        }
-
+        } else if (keyCode == 49) {
+            if (formasiawal) {
+                formasiawal = false;
+            } else {
+                formasiawal = true;
+            }
+        } else if (keyCode == 50) {
+            if (formasimenyerang) {
+                formasimenyerang = false;
+            } else {
+                formasimenyerang = true;
+            }
+    } else if (keyCode == 51) {
+            if (formasibertahan) {
+                formasibertahan = false;
+            } else {
+                formasibertahan = true;
+            }
     }
+}
 }
