@@ -129,8 +129,6 @@ public class GraphicFinal extends JFrame {
     private GLCapabilities createGLCapabilites() {
         GLCapabilities capabilities = new GLCapabilities();
         capabilities.setHardwareAccelerated(true);
-
-        // try to enable 2x anti aliasing - should be supported on most hardware    
         capabilities.setNumSamples(2);
         capabilities.setSampleBuffers(true);
         return capabilities;

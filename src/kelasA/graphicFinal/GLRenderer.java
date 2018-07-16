@@ -62,9 +62,9 @@ public class GLRenderer implements GLEventListener {
 
     }
 
-    vector Sumbu_z = new vector(0f, 0f, -1f);//deklarasi awal vektor untuk maju & mundur 
-    vector Sumbu_x = new vector(1f, 0f, 0f);//deklarasi awal vektor untuk gerakan ke kanan & kiri 
-    vector Sumbu_y = new vector(0f, 1f, 0f);//deklarasi awal vetor untuk gerakan naik & turun
+    vector Sumbu_z = new vector(0f, 0f, -1f);
+    vector Sumbu_x = new vector(1f, 0f, 0f);
+    vector Sumbu_y = new vector(0f, 1f, 0f);
 
     float Cx = 0, Cy = 2.5f, Cz = 0;
     float Lx = 0, Ly = 2.5f, Lz = -20f;
@@ -80,12 +80,6 @@ public class GLRenderer implements GLEventListener {
 
     boolean ori = true;
 
-    /*
- ini adalah metod untuk melakukan pergerakan.
- magnitude adalah besarnya gerakan sedangkan
-direction digunakan untuk menentukan arah.
- gunakan -1 untuk arah berlawanan dengan vektor awal
-     */
     private void vectorMovement(vector toMove, float magnitude, float direction) {
         float speedX = toMove.x * magnitude * direction;
         float speedY = toMove.y * magnitude * direction;
@@ -102,11 +96,11 @@ direction digunakan untuk menentukan arah.
 
     private void cameraRotation(vector reference, double angle) {
         float M = (float) (Math.sqrt(Math.pow(reference.x, 2) + Math.pow(reference.y,
-                2) + Math.pow(reference.z, 2)));//magnitud
+                2) + Math.pow(reference.z, 2)));
 
-        float Up_x1 = reference.x / M; //melakukan
-        float Up_y1 = reference.y / M; //normalisasi
-        float Up_z1 = reference.z / M; //vektor patokan
+        float Up_x1 = reference.x / M; 
+        float Up_y1 = reference.y / M; 
+        float Up_z1 = reference.z / M; 
 
         float VLx = Lx - Cx;
         float VLy = Ly - Cy;
@@ -157,8 +151,7 @@ direction digunakan untuk menentukan arah.
             int y, int width, int height) {
         GL gl = drawable.getGL();
         GLU glu = new GLU();
-        if (height <= 0) { // avoid a divide by zeroerror !
-
+        if (height <= 0) {
             height = 1;
         }
         final float h = (float) width / (float) height;
@@ -196,61 +189,48 @@ direction digunakan untuk menentukan arah.
 
     void Key_Pressed(int keyCode) {
 
-        //huruf W
         if (keyCode == 87) {
             vectorMovement(Sumbu_z, 2f, 1f);
-        } //huruf S
+        }
         else if (keyCode == 83) {
             vectorMovement(Sumbu_z, 2f, -1f);
-        } //huruf D
+        }
         else if (keyCode == 68) {
             vectorMovement(Sumbu_x, 2f, 1f);
-        } //huruf A
+        }
         else if (keyCode == 65) {
             vectorMovement(Sumbu_x, 2f, -1f);
-        } //panah atas
+        }
         else if (keyCode == 38) {
             vectorMovement(Sumbu_y, 2f, 1f);
-        } //panah bawah
+        }
         else if (keyCode == 40) {
             vectorMovement(Sumbu_y, 2f, -1f);
-        } //huruf J
+        }
         else if (keyCode == 74) {
-            sudut_z += 15f; //sudut terhadap z
-
+            sudut_z += 15f;
             Sumbu_z.vectorRotation(Sumbu_y, sudut_z - sudut_z2);
-            //memutar vector sumbu z terhadap x (target,patokan) 
             Sumbu_x.vectorRotation(Sumbu_y, sudut_z - sudut_z2);
-
-            cameraRotation(Sumbu_y, sudut_z - sudut_z2);//look at
-            sudut_z2 = sudut_z; //nyimpan sudut akhir
+            cameraRotation(Sumbu_y, sudut_z - sudut_z2);
+            sudut_z2 = sudut_z;
         } else if (keyCode == 76) {
-            sudut_z -= 15f; //sudut terhadap z
-
+            sudut_z -= 15f;
             Sumbu_z.vectorRotation(Sumbu_y, sudut_z + sudut_z2);
-            //memutar vector sumbu z terhadap x (target,patokan) 
             Sumbu_x.vectorRotation(Sumbu_y, sudut_z + sudut_z2);
-
-            cameraRotation(Sumbu_y, sudut_z - sudut_z2);//look at
-            sudut_z2 = sudut_z; //nyimpan sudut akhir
+            cameraRotation(Sumbu_y, sudut_z - sudut_z2);
+            sudut_z2 = sudut_z;
         } else if (keyCode == 73) {
-            sudut_z += 15f; //sudut terhadap z
-
+            sudut_z += 15f;
             Sumbu_z.vectorRotation(Sumbu_x, sudut_z - sudut_z2);
-            //memutar vector sumbu z terhadap x (target,patokan) 
             Sumbu_x.vectorRotation(Sumbu_x, sudut_z - sudut_z2);
-
-            cameraRotation(Sumbu_x, sudut_z - sudut_z2);//look at
-            sudut_z2 = sudut_z; //nyimpan sudut akhir
+            cameraRotation(Sumbu_x, sudut_z - sudut_z2);
+            sudut_z2 = sudut_z;
         } else if (keyCode == 75) {
-            sudut_z -= 15f; //sudut terhadap z
-
+            sudut_z -= 15f;
             Sumbu_z.vectorRotation(Sumbu_x, sudut_z + sudut_z2);
-            //memutar vector sumbu z terhadap x (target,patokan) 
             Sumbu_x.vectorRotation(Sumbu_x, sudut_z + sudut_z2);
-
-            cameraRotation(Sumbu_x, sudut_z - sudut_z2);//look at
-            sudut_z2 = sudut_z; //nyimpan sudut akhir
+            cameraRotation(Sumbu_x, sudut_z - sudut_z2);
+            sudut_z2 = sudut_z;
         }
 
     }
