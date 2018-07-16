@@ -196,13 +196,13 @@ public class Objek {
     
     static void Pemain(GL gl, GLU glu, int tipe) {
         if(tipe == 1){
-            gl.glColor3f(1, 1, 0);
+            gl.glColor3f(0.91f, 0.99f, 0);
         }else if(tipe == 2){
-            gl.glColor3f(0, 1, 0);
+            gl.glColor3f(0.17f, 0.65f, 0.11f);
         }else if(tipe == 3){
-            gl.glColor3f(0, 0, 1);
+            gl.glColor3f(0.05f, 0.34f, 0.7f);
         }else if(tipe == 4){
-            gl.glColor3f(1, 0, 0);
+            gl.glColor3f(0.82f, 0.01f, 0.01f);
         }
         //badan
         float BODY_LENGTH = 0.35f;
