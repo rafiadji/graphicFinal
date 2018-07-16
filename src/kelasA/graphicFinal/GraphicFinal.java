@@ -1,4 +1,4 @@
-package kelasA.graphicFinal;
+ package kelasA.graphicFinal;
 
 import com.sun.opengl.util.Animator;
 import java.awt.Dimension;
