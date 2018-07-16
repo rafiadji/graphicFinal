@@ -187,16 +187,30 @@ public class GLRenderer implements GLEventListener {
 
     float[][] menyerang = {
         {-5.5f, 0f, 0f, 1},
-        {-4.0f, 0f, 0.8f, 2},
+        {-4.0f, 0f, 1.3f, 2},
         {-4.0f, 0f, 0f, 2},
-        {-4.0f, 0f, -0.8f, 2},
-        {-2.2f, 0f, 0.5f, 3},
-        {-2.2f, 0f, -0.5f, 3},
-        {-0.4f, 0f, 0f, 3},
-        {2.2f, 0f, 1.8f, 3},
-        {2.2f, 0f, -1.8f, 3},
-        {3.0f, 0f, 0.5f, 4},
-        {4.0f, 0f, -0.4f, 4}
+        {-4.0f, 0f, -1.3f, 2},
+        {0f, 0f, 0.7f, 3},
+        {0f, 0f, -0.7f, 3},
+        {2.3f, 0f, 1.8f, 3},
+        {2.3f, 0f, -1.8f, 3},
+        {4.4f, 0f, 1.8f, 4},
+        {4.4f, 0f, -1.8f, 4},
+        {5f, 0f, 0f, 4}
+    };
+    
+    float[][] bertahan = {
+        {-5.5f, 0f, 0f, 1},
+        {-3.6f , 0f , 1.8f, 2},
+        {-4.0f , 0f , 0.8f, 2},
+        {-4.0f , 0f , 0f, 2},
+        {-4.0f , 0f , -0.8f, 2},
+        {-3.6f , 0f , -1.8f, 2},
+        {-1.4f , 0f , -1.4f, 3},
+        {-1.4f , 0f , -0.7f, 3},
+        {-1.4f , 0f , 0.7f, 3},
+        {-1.4f , 0f , 1.4f, 3},
+        {1.4f , 0f , 0f, 4}
     };
 
     public void display(GLAutoDrawable drawable) {
@@ -218,6 +232,7 @@ public class GLRenderer implements GLEventListener {
         }
         Objek.Lapangan(drawable);
 
+
         if (kamera) {
             formasi = -45f;
         }
@@ -228,6 +243,8 @@ public class GLRenderer implements GLEventListener {
             setPemain(menyerang, gl, glu);
         } if (formasiawal){
             setPemain(awal, gl, glu);
+        } if (formasibertahan){
+            setPemain(bertahan, gl, glu);
         }
         gl.glFlush();
     }
@@ -247,29 +264,37 @@ public class GLRenderer implements GLEventListener {
 
     void Key_Pressed(int keyCode) {
 
-        if (keyCode == 49) {
+        if (keyCode == 49) { //tombol 1
             if (kamera) {
                 kamera = false;
             } else {
                 kamera = true;
             }
-        } else if (keyCode == 50) {
+        } else if (keyCode == 50) { //tombol 2
              if (kamera2) {
                 kamera2 = false;
             } else {
                 kamera2 = true;
             }
-        } else if (keyCode == 51) {
+        } else if (keyCode == 52) { //tombol 4
             if (formasimenyerang) {
                 formasimenyerang = false;
             } else {
                 formasimenyerang = true;
             }
-        }else if (keyCode == 52) {
+            
+        }else if (keyCode == 51) { //tombol 3
             if (formasiawal) {
                 formasiawal = false;
             } else {
                 formasiawal = true;
+            }
+            
+            }else if (keyCode == 53) { //tombol 5
+            if (formasibertahan) {
+                formasibertahan = false;
+            } else {
+                formasibertahan = true;
             }
             if (keyCode == 87) {
                 vectorMovement(Sumbu_z, 2f, 1f);
