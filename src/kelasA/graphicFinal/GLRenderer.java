@@ -74,7 +74,7 @@ public class GLRenderer implements GLEventListener {
     float angle_samping2 = 0f;
     float angle_vertikal = 0f;
     float angle_vertikal2 = 0f;
-    float formasi = 90f;
+    float formasi = 0f;
     boolean ori = true, formasiawal = false, formasimenyerang = false, formasibertahan = false, kamera = false;
     vector Sumbu_z = new vector(0f, 0f, -1f);//deklarasi awal vektor untuk maju & mundur
     vector Sumbu_x = new vector(1f, 0f, 0f);//deklarasi awal vektor untuk gerakan ke kanan & kiri
@@ -172,6 +172,15 @@ public class GLRenderer implements GLEventListener {
         gl.glLoadIdentity();
     }
 
+    float[][] awal = {
+        {-5.5f, 0f, 0f, 1},
+        {-3.6f, 0f, 1.8f, 2},
+        {-4.0f, 0f, 0.8f, 2},
+        {-4.0f, 0f, 0f, 2},
+        {-4.0f, 0f, -0.8f, 2},
+        {-3.6f, 0f, -1.8f, 2}
+    };
+    
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
         GLU glu = new GLU();
@@ -185,222 +194,28 @@ public class GLRenderer implements GLEventListener {
 
         gl.glTranslatef(0.0f, 3.0f, -15.0f);
         gl.glRotatef(-90, 1, 0, 0);
-        gl.glPushMatrix();
-        Objek.Lapangan(drawable);
-        gl.glPopMatrix();
-
-
-        if (formasiawal) {
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-5.7f, 0.0f, 0.2f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 1);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-3.5f, 0.0f, -0.9f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 2);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-3.2f, 0.0f, 0.2f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 2);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-3.5f, 0.0f, 1.2f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 2);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-2.6f, 0.0f, 2.0f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 2);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-2.6f, 0.0f, -1.6f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 2);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(0.0f, 0.0f, 0.9f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 3);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(0.0f, 0.0f, -0.7f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 3);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(2.0f, 0.0f, -1.6f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 3);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(2.0f, 0.0f, 2.0f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 3);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(4.5f, 0.0f, 0.2f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 4);
-            gl.glPopMatrix();
-            gl.glFlush();
-        }
         
-  if (formasimenyerang) {
-
+    gl.glRotatef(formasi, 1, 0, 0);
+        for (int i = 0; i <= 11; i++) {
             gl.glPushMatrix();
-            gl.glTranslatef(-5.7f, 0.0f, 0.2f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 1);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-3.5f, 0.0f, -0.9f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 2);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-3.2f, 0.0f, 0.2f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 2);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-3.5f, 0.0f, 1.2f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 2);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(2.0f, 0.0f, 2.0f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 2);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(2.0f, 0.0f, -1.6f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 2);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(0.0f, 0.0f, 0.9f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 3);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(0.0f, 0.0f, -0.7f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 3);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(4.5f, 0.0f, -0.4f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 3);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(2.0f, 0.0f, 0.2f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 3);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(5.0f, 0.0f, 0.6f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 4);
-            gl.glPopMatrix();
-            gl.glFlush();
         }
-  
-  if (formasibertahan) {
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-5.7f, 0.0f, 0.2f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 1);
+        Objek.Lapangan(drawable);
+        for (int i = 0; i < awal.length; i++) {
+            System.out.println(awal[i][0] + " " + awal[i][1]  + " " + awal[i][2] + " " + awal[i][3]);
             gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-4.8f, 0.0f, -0.9f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 2);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-4.6f, 0.0f, 0.2f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 2);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-4.8f, 0.0f, 1.2f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 2);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-4.5f, 0.0f, 2.0f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 2);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-4.5f, 0.0f, -1.6f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 2);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-3.0f, 0.0f, 0.2f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 3);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-1.8f, 0.0f, 0.2f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 3);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-1.0f, 0.0f, -1.6f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 3);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(-1.0f, 0.0f, 2.0f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 3);
-            gl.glPopMatrix();
-
-            gl.glPushMatrix();
-            gl.glTranslatef(2.0f, 0.0f, 0.2f);
-            gl.glRotatef(-180, 1, 0, 0);
-            Objek.Pemain(gl, glu, 4);
-            gl.glPopMatrix();
-            gl.glFlush();
+            gl.glTranslatef(awal[i][0], awal[i][1], awal[i][2]);
+            gl.glRotatef(180, 1, 0, 0);
+            Objek.Pemain(gl, glu, awal[i][3]);
         }
-  gl.glFlush();
+//        gl.glPopMatrix();
+//        gl.glTranslatef(-5.5f, 0f, 0f);
+//        gl.glRotatef(180, 1, 0, 0);
+//        Objek.Pemain(gl, glu, 1);
 
+if (kamera){
+        formasi = -45f;
+}
+        gl.glFlush();
     }
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
@@ -409,10 +224,10 @@ public class GLRenderer implements GLEventListener {
     void Key_Pressed(int keyCode) {
 
  if (keyCode == 49) {
-            if (formasiawal) {
-                formasiawal = false;
+            if (kamera) {
+                kamera = false;
             } else {
-                formasiawal = true;
+                kamera = true;
             }
         } else if (keyCode == 50) {
             if (formasimenyerang) {

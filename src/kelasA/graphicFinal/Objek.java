@@ -194,7 +194,7 @@ public class Objek {
     }
     
     
-    static void Pemain(GL gl, GLU glu, int tipe) {
+    static void Pemain(GL gl, GLU glu, float tipe) {
         if(tipe == 1){
             gl.glColor3f(0.91f, 0.99f, 0);
         }else if(tipe == 2){
