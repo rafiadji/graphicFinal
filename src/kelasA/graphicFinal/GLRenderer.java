@@ -187,16 +187,30 @@ public class GLRenderer implements GLEventListener {
 
     float[][] menyerang = {
         {-5.5f, 0f, 0f, 1},
-        {-4.0f, 0f, 0.8f, 2},
+        {-4.0f, 0f, 1.3f, 2},
         {-4.0f, 0f, 0f, 2},
-        {-4.0f, 0f, -0.8f, 2},
-        {-2.2f, 0f, 0.5f, 3},
-        {-2.2f, 0f, -0.5f, 3},
-        {-0.4f, 0f, 0f, 3},
-        {2.2f, 0f, 1.8f, 3},
-        {2.2f, 0f, -1.8f, 3},
-        {3.0f, 0f, 0.5f, 4},
-        {4.0f, 0f, -0.4f, 4}
+        {-4.0f, 0f, -1.3f, 2},
+        {0f, 0f, 0.7f, 3},
+        {0f, 0f, -0.7f, 3},
+        {2.3f, 0f, 1.8f, 3},
+        {2.3f, 0f, -1.8f, 3},
+        {4.4f, 0f, 1.8f, 4},
+        {4.4f, 0f, -1.8f, 4},
+        {5f, 0f, 0f, 4}
+    };
+    
+    float[][] bertahan = {
+        {-5.5f, 0f, 0f, 1},
+        {-3.6f , 0f , 1.8f, 2},
+        {-4.0f , 0f , 0.8f, 2},
+        {-4.0f , 0f , 0f, 2},
+        {-4.0f , 0f , -0.8f, 2},
+        {-3.6f , 0f , -1.8f, 2},
+        {-1.4f , 0f , -1.4f, 3},
+        {-1.4f , 0f , -0.7f, 3},
+        {-1.4f , 0f , 0.7f, 3},
+        {-1.4f , 0f , 1.4f, 3},
+        {1.4f , 0f , 0f, 4}
     };
 
     public void display(GLAutoDrawable drawable) {
@@ -217,10 +231,9 @@ public class GLRenderer implements GLEventListener {
             gl.glPushMatrix();
         }
         Objek.Lapangan(drawable);
-        setPemain(awal, gl, glu);
+        setPemain(bertahan, gl, glu);
 
         if (kamera) {
-            setPemain(menyerang, gl, glu);
             formasi = -45f;
         }
         gl.glFlush();
