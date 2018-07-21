@@ -31,7 +31,7 @@ public class GLRenderer implements GLEventListener {
             vector temp = reference;
             float magnitude
                     = (float) Math.sqrt(Math.pow(temp.x, 2) + Math.pow(temp.y,
-                                    2) + Math.pow(temp.z, 2));
+                            2) + Math.pow(temp.z, 2));
             temp.x = temp.x / magnitude;
             temp.y
                     = temp.y / magnitude;
@@ -66,8 +66,8 @@ public class GLRenderer implements GLEventListener {
     vector depanBelakang = new vector(0f, 0f, -1f);//deklarasi awal vektor untuk maju & mundur
     vector samping = new vector(1f, 0f, 0f);//deklarasi awal vektor untuk gerakan ke kanan & kiri
     vector vertikal = new vector(0f, 1f, 0f);//deklarasi awal vetor untuk gerakan naik & turun
-    float Cx = 0, Cy = 2.5f, Cz = 0;
-    float Lx = 0, Ly = 2.5f, Lz = -20f;
+    float Cx = 0, Cy = 9.5f, Cz = 0;
+    float Lx = 0, Ly = -5.5f, Lz = -40f;
     float angle_depanBelakang = 0f;
     float angle_depanBelakang2 = 0f;
     float angle_samping = 0f;
@@ -75,6 +75,7 @@ public class GLRenderer implements GLEventListener {
     float angle_vertikal = 0f;
     float angle_vertikal2 = 0f;
     float formasi = 0f;
+    float formasi2 = -180f;
     boolean ori = true, formasiawal = false, formasimenyerang = false, formasibertahan = false, kamera = false, kamera2 = false;
     vector Sumbu_z = new vector(0f, 0f, -1f);//deklarasi awal vektor untuk maju & mundur
     vector Sumbu_x = new vector(1f, 0f, 0f);//deklarasi awal vektor untuk gerakan ke kanan & kiri
@@ -198,19 +199,35 @@ public class GLRenderer implements GLEventListener {
         {4.4f, 0f, -1.8f, 4},
         {5f, 0f, 0f, 4}
     };
-    
+
     float[][] bertahan = {
         {-5.5f, 0f, 0f, 1},
-        {-3.6f , 0f , 1.8f, 2},
-        {-4.0f , 0f , 0.8f, 2},
-        {-4.0f , 0f , 0f, 2},
-        {-4.0f , 0f , -0.8f, 2},
-        {-3.6f , 0f , -1.8f, 2},
-        {-1.4f , 0f , -1.4f, 3},
-        {-1.4f , 0f , -0.7f, 3},
-        {-1.4f , 0f , 0.7f, 3},
-        {-1.4f , 0f , 1.4f, 3},
-        {1.4f , 0f , 0f, 4}
+        {-3.6f, 0f, 1.8f, 2},
+        {-4.0f, 0f, 0.8f, 2},
+        {-4.0f, 0f, 0f, 2},
+        {-4.0f, 0f, -0.8f, 2},
+        {-3.6f, 0f, -1.8f, 2},
+        {-1.4f, 0f, -1.4f, 3},
+        {-1.4f, 0f, -0.7f, 3},
+        {-1.4f, 0f, 0.7f, 3},
+        {-1.4f, 0f, 1.4f, 3},
+        {1.4f, 0f, 0f, 4}
+    };
+
+    float from[][] = awal, to[][];
+
+    float form[][] = {
+        {0f, 0f, 0f, 1},
+        {0f, 0f, 0f, 1},
+        {0f, 0f, 0f, 1},
+        {0f, 0f, 0f, 1},
+        {0f, 0f, 0f, 1},
+        {0f, 0f, 0f, 1},
+        {0f, 0f, 0f, 1},
+        {0f, 0f, 0f, 1},
+        {0f, 0f, 0f, 1},
+        {0f, 0f, 0f, 1},
+        {0f, 0f, 0f, 1}
     };
 
     public void display(GLAutoDrawable drawable) {
@@ -224,7 +241,14 @@ public class GLRenderer implements GLEventListener {
                 vertikal.x, vertikal.y, vertikal.z);
 
         gl.glTranslatef(0.0f, 3.0f, -15.0f);
-        gl.glRotatef(-90, 1, 0, 0);
+        gl.glRotatef(-180, 0, 0, 1);
+        if (kamera) {
+            formasi = -45f;
+            gl.glRotatef(formasi2, 0, 0, 1);
+        } else {
+            formasi = 0f;
+            gl.glRotatef(formasi2, 0, 1, 0);
+        }
 
         gl.glRotatef(formasi, 1, 0, 0);
         for (int i = 0; i <= 11; i++) {
@@ -232,20 +256,50 @@ public class GLRenderer implements GLEventListener {
         }
         Objek.Lapangan(drawable);
 
+        if (formasimenyerang) {
+            to = menyerang;
+        } else if (formasibertahan) {
+            to = bertahan;
+        } else {
+            to = awal;
+        }
+        form = from;
+        if (form == to) {
+            from = to;
+        } else {
+            for (int i = 0; i < to.length; i++) {
+                if (form[i][0] > to[i][0]) {
+                    form[i][0] -= 0.1;
+                } else if (form[i][0] < to[i][0]) {
+                    form[i][0] += 0.1;
+                } else {
+                    form[i][0] = to[i][0];
+                }
 
-        if (kamera) {
-            formasi = -45f;
+                if (form[i][1] > to[i][1]) {
+                    form[i][1] -= 0.1;
+                } else if (form[i][1] < to[i][1]) {
+                    form[i][1] += 0.1;
+                } else {
+                    form[i][1] = to[i][1];
+                }
+
+                if (form[i][2] > to[i][2]) {
+                    form[i][2] -= 0.1;
+                } else if (form[i][2] < to[i][2]) {
+                    form[i][2] += 0.1;
+                } else {
+                    form[i][2] = to[i][2];
+                }
+
+                form[i][3] = to[i][3];
+            }
+            if (form == to) {
+                from = to;
+            }
         }
-        if (kamera2) {
-            formasi = 0f;
-        } 
-        if (formasimenyerang){
-            setPemain(menyerang, gl, glu);
-        } if (formasiawal){
-            setPemain(awal, gl, glu);
-        } if (formasibertahan){
-            setPemain(bertahan, gl, glu);
-        }
+        setPemain(form, gl, glu);
+
         gl.glFlush();
     }
 
@@ -271,70 +325,71 @@ public class GLRenderer implements GLEventListener {
                 kamera = true;
             }
         } else if (keyCode == 50) { //tombol 2
-             if (kamera2) {
-                kamera2 = false;
-            } else {
-                kamera2 = true;
-            }
-        } else if (keyCode == 52) { //tombol 4
-            if (formasimenyerang) {
-                formasimenyerang = false;
-            } else {
-                formasimenyerang = true;
-            }
-            
-        }else if (keyCode == 51) { //tombol 3
             if (formasiawal) {
                 formasiawal = false;
             } else {
                 formasiawal = true;
+                formasibertahan = false;
+                formasimenyerang = false;
             }
-            
-            }else if (keyCode == 53) { //tombol 5
+        } else if (keyCode == 51) { //tombol 3
+            if (formasimenyerang) {
+                formasimenyerang = false;
+            } else {
+                formasimenyerang = true;
+                formasibertahan = false;
+                formasiawal = false;
+            }
+        } else if (keyCode == 52) { //tombol 4
             if (formasibertahan) {
                 formasibertahan = false;
             } else {
                 formasibertahan = true;
+                formasimenyerang = false;
+                formasiawal = false;
             }
-            if (keyCode == 87) {
-                vectorMovement(Sumbu_z, 2f, 1f);
-            } else if (keyCode == 83) {
-                vectorMovement(Sumbu_z, 2f, -1f);
-            } else if (keyCode == 68) {
-                vectorMovement(Sumbu_x, 2f, 1f);
-            } else if (keyCode == 65) {
-                vectorMovement(Sumbu_x, 2f, -1f);
-            } else if (keyCode == 38) {
-                vectorMovement(Sumbu_y, 2f, 1f);
-            } else if (keyCode == 40) {
-                vectorMovement(Sumbu_y, 2f, -1f);
-            } else if (keyCode == 74) {
-                sudut_z += 15f;
-                Sumbu_z.vectorRotation(Sumbu_y, sudut_z - sudut_z2);
-                Sumbu_x.vectorRotation(Sumbu_y, sudut_z - sudut_z2);
-                cameraRotation(Sumbu_y, sudut_z - sudut_z2);
-                sudut_z2 = sudut_z;
-            } else if (keyCode == 76) {
-                sudut_z -= 15f;
-                Sumbu_z.vectorRotation(Sumbu_y, sudut_z + sudut_z2);
-                Sumbu_x.vectorRotation(Sumbu_y, sudut_z + sudut_z2);
-                cameraRotation(Sumbu_y, sudut_z - sudut_z2);
-                sudut_z2 = sudut_z;
-            } else if (keyCode == 73) {
-                sudut_z += 15f;
-                Sumbu_z.vectorRotation(Sumbu_x, sudut_z - sudut_z2);
-                Sumbu_x.vectorRotation(Sumbu_x, sudut_z - sudut_z2);
-                cameraRotation(Sumbu_x, sudut_z - sudut_z2);
-                sudut_z2 = sudut_z;
-            } else if (keyCode == 75) {
-                sudut_z -= 15f;
-                Sumbu_z.vectorRotation(Sumbu_x, sudut_z + sudut_z2);
-                Sumbu_x.vectorRotation(Sumbu_x, sudut_z + sudut_z2);
-                cameraRotation(Sumbu_x, sudut_z - sudut_z2);
-                sudut_z2 = sudut_z;
-            }
-
         }
 
+        if (keyCode == 87) { // tombol W
+            vectorMovement(Sumbu_z, 2f, 1f);
+        } else if (keyCode == 83) { // tombol S
+            vectorMovement(Sumbu_z, 2f, -1f);
+        } else if (keyCode == 68) { // tombol D
+            vectorMovement(Sumbu_x, 2f, 1f);
+        } else if (keyCode == 65) { // tombol A
+            vectorMovement(Sumbu_x, 2f, -1f);
+        } else if (keyCode == 38) { // tombol arah  atas
+            vectorMovement(Sumbu_y, 2f, 1f);
+        } else if (keyCode == 40) { // tombol arah bawah
+            vectorMovement(Sumbu_y, 2f, -1f);
+        } else if (keyCode == 37) { // tombol arah  kiri
+            formasi2 -= 2;
+        } else if (keyCode == 39) { // tombol arah kanan
+            formasi2 += 2;
+        } else if (keyCode == 74) {
+            sudut_z += 15f;
+            Sumbu_z.vectorRotation(Sumbu_y, sudut_z - sudut_z2);
+            Sumbu_x.vectorRotation(Sumbu_y, sudut_z - sudut_z2);
+            cameraRotation(Sumbu_y, sudut_z - sudut_z2);
+            sudut_z2 = sudut_z;
+        } else if (keyCode == 76) {
+            sudut_z -= 15f;
+            Sumbu_z.vectorRotation(Sumbu_y, sudut_z + sudut_z2);
+            Sumbu_x.vectorRotation(Sumbu_y, sudut_z + sudut_z2);
+            cameraRotation(Sumbu_y, sudut_z - sudut_z2);
+            sudut_z2 = sudut_z;
+        } else if (keyCode == 73) {
+            sudut_z += 15f;
+            Sumbu_z.vectorRotation(Sumbu_x, sudut_z - sudut_z2);
+            Sumbu_x.vectorRotation(Sumbu_x, sudut_z - sudut_z2);
+            cameraRotation(Sumbu_x, sudut_z - sudut_z2);
+            sudut_z2 = sudut_z;
+        } else if (keyCode == 75) {
+            sudut_z -= 15f;
+            Sumbu_z.vectorRotation(Sumbu_x, sudut_z + sudut_z2);
+            Sumbu_x.vectorRotation(Sumbu_x, sudut_z + sudut_z2);
+            cameraRotation(Sumbu_x, sudut_z - sudut_z2);
+            sudut_z2 = sudut_z;
+        }
     }
 }
