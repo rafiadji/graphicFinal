@@ -32,7 +32,7 @@ public class GLRenderer implements GLEventListener {
             vector temp = reference;
             float magnitude
                     = (float) Math.sqrt(Math.pow(temp.x, 2) + Math.pow(temp.y,
-                            2) + Math.pow(temp.z, 2));
+                                    2) + Math.pow(temp.z, 2));
             temp.x = temp.x / magnitude;
             temp.y
                     = temp.y / magnitude;
@@ -233,9 +233,6 @@ public class GLRenderer implements GLEventListener {
 
     DecimalFormat df = new DecimalFormat("#.#");
 
-    boolean cek1, cek2, cek3;
-    int pilih = 0;
-
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
         GLU glu = new GLU();
@@ -264,74 +261,53 @@ public class GLRenderer implements GLEventListener {
 
         if (formasimenyerang) {
             to = menyerang;
-            pilih = 2;
         } else if (formasibertahan) {
             to = bertahan;
-            pilih = 3;
         } else {
             to = awal;
-            pilih = 1;
-            System.out.println("a");
         }
-
         form = from;
-        for (int i = 0; i < to.length; i++) {
-            if (form[i][0] > to[i][0]) {
-                form[i][0] -= 0.1;
-                form[i][0] = Float.parseFloat(df.format(form[i][0]));
-            } else if (form[i][0] < to[i][0]) {
-                form[i][0] += 0.1;
-                form[i][0] = Float.parseFloat(df.format(form[i][0]));
-            } else {
-                form[i][0] = to[i][0];
-            }
+        if (from == to) {
+            from = to;
+        } else {
 
-            if (form[i][1] > to[i][1]) {
-                form[i][1] -= 0.1;
-                form[i][1] = Float.parseFloat(df.format(form[i][1]));
-            } else if (form[i][1] < to[i][1]) {
-                form[i][1] += 0.1;
-                form[i][1] = Float.parseFloat(df.format(form[i][1]));
-            } else {
-                form[i][1] = to[i][1];
-            }
+            for (int i = 0; i < to.length; i++) {
+                if (form[i][0] > to[i][0]) {
+                    form[i][0] -= 0.1;
+                    form[i][0] = Float.parseFloat(df.format(form[i][0]));
+                } else if (form[i][0] < to[i][0]) {
+                    form[i][0] += 0.1;
+                    form[i][0] = Float.parseFloat(df.format(form[i][0]));
+                } else {
+                    form[i][0] = to[i][0];
+                }
 
-            if (form[i][2] > to[i][2]) {
-                form[i][2] -= 0.1;
-                form[i][2] = Float.parseFloat(df.format(form[i][2]));
-            } else if (form[i][2] < to[i][2]) {
-                form[i][2] += 0.1;
-                form[i][2] = Float.parseFloat(df.format(form[i][2]));
-            } else {
-                form[i][2] = to[i][2];
-            }
+                if (form[i][1] > to[i][1]) {
+                    form[i][1] -= 0.1;
+                    form[i][1] = Float.parseFloat(df.format(form[i][1]));
+                } else if (form[i][1] < to[i][1]) {
+                    form[i][1] += 0.1;
+                    form[i][1] = Float.parseFloat(df.format(form[i][1]));
+                } else {
+                    form[i][1] = to[i][1];
+                }
 
-            form[i][3] = to[i][3];
-        }
-        int cnt = 0;
-        for (int i = 0; i < to.length; i++) {
-            if (form[i][0] == to[i][0] && form[i][1] == to[i][1] && form[i][2] == to[i][2] && form[i][3] == to[i][3]) {
-                cnt += 1;
-            }
-        }
-        if (cnt == 11) {
-            if (pilih == 1) {
-                from = awal;
-                System.out.println("a");
-            } else if (pilih == 2) {
-                from = menyerang;
-            } else if (pilih == 3) {
-                from = bertahan;
+                if (form[i][2] > to[i][2]) {
+                    form[i][2] -= 0.1;
+                    form[i][2] = Float.parseFloat(df.format(form[i][2]));
+                } else if (form[i][2] < to[i][2]) {
+                    form[i][2] += 0.1;
+                    form[i][2] = Float.parseFloat(df.format(form[i][2]));
+                } else {
+                    form[i][2] = to[i][2];
+                }
+
+                form[i][3] = to[i][3];
             }
         }
-//        if (from == to) {
-//            from = to;
-//        } else {
-//            
+//        for (int i = 0; i < to.length; i++) {
+//            System.out.println(from[i][0] + " " + from[i][1] + " " + from[i][2] + " " + from[i][3]);
 //        }
-        for (int i = 0; i < to.length; i++) {
-            System.out.println(from[i][0] + " " + from[i][1] + " " + from[i][2] + " " + from[i][3]);
-        }
         setPemain(form, gl, glu);
         gl.glFlush();
     }
