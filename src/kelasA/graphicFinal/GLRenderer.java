@@ -75,7 +75,6 @@ public class GLRenderer implements GLEventListener {
     float angle_samping2 = 0f;
     float angle_vertikal = 0f;
     float angle_vertikal2 = 0f;
-    float formasi = 0f;
     float formasi2 = -180f;
     boolean ori = true, formasiawal = false, formasimenyerang = false, formasibertahan = false, kamera = false, kamera2 = false;
     vector Sumbu_z = new vector(0f, 0f, -1f);//deklarasi awal vektor untuk maju & mundur
@@ -245,15 +244,7 @@ public class GLRenderer implements GLEventListener {
 
         gl.glTranslatef(0.0f, 3.0f, -15.0f);
         gl.glRotatef(-180, 0, 0, 1);
-        if (kamera) {
-            formasi = -45f;
-            gl.glRotatef(formasi2, 0, 0, 1);
-        } else {
-            formasi = 0f;
-            gl.glRotatef(formasi2, 0, 1, 0);
-        }
-
-        gl.glRotatef(formasi, 1, 0, 0);
+        gl.glRotatef(formasi2, 0, 1, 0);
         for (int i = 0; i <= 11; i++) {
             gl.glPushMatrix();
         }
@@ -268,6 +259,7 @@ public class GLRenderer implements GLEventListener {
         }
         form = from;
         if (from == to) {
+            System.out.println("sama");
             from = to;
         } else {
 
@@ -327,13 +319,7 @@ public class GLRenderer implements GLEventListener {
 
     void Key_Pressed(int keyCode) {
 
-        if (keyCode == 49) { //tombol 1
-            if (kamera) {
-                kamera = false;
-            } else {
-                kamera = true;
-            }
-        } else if (keyCode == 50) { //tombol 2
+        if (keyCode == 50) { //tombol 2
             if (formasiawal) {
                 formasiawal = false;
             } else {
@@ -375,30 +361,6 @@ public class GLRenderer implements GLEventListener {
             formasi2 -= 2;
         } else if (keyCode == 39) { // tombol arah kanan
             formasi2 += 2;
-        } else if (keyCode == 74) {
-            sudut_z += 15f;
-            Sumbu_z.vectorRotation(Sumbu_y, sudut_z - sudut_z2);
-            Sumbu_x.vectorRotation(Sumbu_y, sudut_z - sudut_z2);
-            cameraRotation(Sumbu_y, sudut_z - sudut_z2);
-            sudut_z2 = sudut_z;
-        } else if (keyCode == 76) {
-            sudut_z -= 15f;
-            Sumbu_z.vectorRotation(Sumbu_y, sudut_z + sudut_z2);
-            Sumbu_x.vectorRotation(Sumbu_y, sudut_z + sudut_z2);
-            cameraRotation(Sumbu_y, sudut_z - sudut_z2);
-            sudut_z2 = sudut_z;
-        } else if (keyCode == 73) {
-            sudut_z += 15f;
-            Sumbu_z.vectorRotation(Sumbu_x, sudut_z - sudut_z2);
-            Sumbu_x.vectorRotation(Sumbu_x, sudut_z - sudut_z2);
-            cameraRotation(Sumbu_x, sudut_z - sudut_z2);
-            sudut_z2 = sudut_z;
-        } else if (keyCode == 75) {
-            sudut_z -= 15f;
-            Sumbu_z.vectorRotation(Sumbu_x, sudut_z + sudut_z2);
-            Sumbu_x.vectorRotation(Sumbu_x, sudut_z + sudut_z2);
-            cameraRotation(Sumbu_x, sudut_z - sudut_z2);
-            sudut_z2 = sudut_z;
-        }
+        } 
     }
 }
